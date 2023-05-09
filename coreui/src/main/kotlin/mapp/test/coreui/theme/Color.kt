@@ -1,4 +1,4 @@
-package mapp.test.evaluationassignmenttestapp.ui.theme
+package mapp.test.coreui.theme
 
 import androidx.compose.ui.graphics.Color
 

@@ -1,4 +1,4 @@
-package mapp.test.evaluationassignmenttestapp.ui.theme
+package mapp.test.coreui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
