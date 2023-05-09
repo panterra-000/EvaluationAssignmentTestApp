@@ -28,6 +28,9 @@ android {
         sourceCompatibility = JavaVersion.VERSION_1_8
         targetCompatibility = JavaVersion.VERSION_1_8
     }
+    buildFeatures {
+        compose = true
+    }
     kotlinOptions {
         jvmTarget = "1.8"
     }
@@ -47,5 +50,6 @@ dependencies {
     api("androidx.compose.ui:ui:1.2.0")
     api("androidx.compose.ui:ui-tooling-preview:1.2.0")
     api("androidx.compose.material:material:1.2.0")
+    api("androidx.hilt:hilt-navigation-compose:1.0.0")
 
 }
