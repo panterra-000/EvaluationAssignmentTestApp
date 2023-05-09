@@ -20,7 +20,7 @@ object AppModule {
     fun provideApolloClient(): ApolloClient {
         return ApolloClient.Builder()
             .serverUrl(BuildConfig.BASE_URL)
-            .addHttpHeader("Authorization",BuildConfig.JWT)
+//            .addHttpHeader("Authorization",BuildConfig.JWT)
             .build()
     }
 
