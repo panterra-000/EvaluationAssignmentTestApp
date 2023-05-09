@@ -16,3 +16,4 @@ rootProject.name = "EvaluationAssignmentTestApp"
 include ':app'
 include ':core'
 include ':coreui'
+include ':presentation'
