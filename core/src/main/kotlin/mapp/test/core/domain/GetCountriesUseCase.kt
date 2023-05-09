@@ -10,8 +10,4 @@ class GetCountriesUseCase(
         return service.fetchCountries().sortedBy { it.name }
     }
 
-    suspend fun testExecute():String{
-        return service.testQuery()
-    }
-
 }

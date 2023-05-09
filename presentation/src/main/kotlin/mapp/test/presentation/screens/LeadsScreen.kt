@@ -71,6 +71,8 @@ private fun CountryItem(
                 text = country.name,
                 fontSize = 24.sp
             )
+            Spacer(modifier = Modifier.width(16.dp))
+            Text(text = country.code, fontSize = 18.sp, color = Color.Red)
         }
         Divider(color = Color.Blue, thickness = 1.dp)
     }

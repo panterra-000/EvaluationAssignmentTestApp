@@ -19,13 +19,4 @@ class LeadsServiceImpl(
             emptyList()
         }
     }
-
-    override suspend fun testQuery(): String {
-        return try {
-            apolloClient.query(FetchLeadsQuery())
-                .execute().errors.toString()
-        } catch (e: Exception) {
-            "error: $e"
-        }
-    }
 }

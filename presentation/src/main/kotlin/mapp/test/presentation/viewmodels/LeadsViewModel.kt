@@ -26,7 +26,6 @@ class LeadsViewModel @Inject constructor(
 
     init {
         getCountries()
-        testQuery()
     }
 
     private fun getCountries() {
@@ -37,10 +36,4 @@ class LeadsViewModel @Inject constructor(
         }
     }
 
-    private fun testQuery() {
-        viewModelScope.launch {
-            val a = getCountriesUseCase.testExecute()
-            textState.value = a
-        }
-    }
 }
