@@ -28,13 +28,13 @@ android {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "BASE_URL", "\"http://54.246.238.84:3000/graphql\"")
-            buildConfigField("String", "JWT", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlSWQiOjE0MDMsImZJZCI6IkRHcjVYMGZHNDdYQW9LUGkiLCJzSWQiOjQxLCJpYXQiOjE2ODMxNDA5MjcsImV4cCI6MTY4NDM1MDUyN30.oC5ka2mlWWoEIXmM7m_FnXjtEqKDzLTjAIu_fwcrA8Y\"")
+            buildConfigField("String", "JWT", "\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlSWQiOjE0MDMsImZJZCI6IkRHcjVYMGZHNDdYQW9LUGkiLCJzSWQiOjQxLCJpYXQiOjE2ODMxNDA5MjcsImV4cCI6MTY4NDM1MDUyN30.oC5ka2mlWWoEIXmM7m_FnXjtEqKDzLTjAIu_fwcrA8Y\"")
         }
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
             buildConfigField("String", "BASE_URL", "\"http://54.246.238.84:3000/graphql\"")
-            buildConfigField("String", "JWT", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlSWQiOjE0MDMsImZJZCI6IkRHcjVYMGZHNDdYQW9LUGkiLCJzSWQiOjQxLCJpYXQiOjE2ODMxNDA5MjcsImV4cCI6MTY4NDM1MDUyN30.oC5ka2mlWWoEIXmM7m_FnXjtEqKDzLTjAIu_fwcrA8Y\"")
+            buildConfigField("String", "JWT", "\"Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlSWQiOjE0MDMsImZJZCI6IkRHcjVYMGZHNDdYQW9LUGkiLCJzSWQiOjQxLCJpYXQiOjE2ODMxNDA5MjcsImV4cCI6MTY4NDM1MDUyN30.oC5ka2mlWWoEIXmM7m_FnXjtEqKDzLTjAIu_fwcrA8Y\"")
         }
     }
     compileOptions {

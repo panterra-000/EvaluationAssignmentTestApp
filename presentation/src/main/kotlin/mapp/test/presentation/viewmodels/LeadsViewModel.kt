@@ -24,21 +24,23 @@ class LeadsViewModel @Inject constructor(
         val countries: List<CountryViewData> = listOf()
     )
 
-
     init {
         getCountries()
+        testQuery()
     }
 
     private fun getCountries() {
         viewModelScope.launch {
-            try {
-                countriesState.value = countriesState.value.copy(isLoading = true)
-                val a = getCountriesUseCase.execute()
-                countriesState.value = countriesState.value.copy(isLoading = false, countries = a)
-            } catch (e: Exception) {
-                myLogD(e.message.toString())
-                textState.value = e.toString()
-            }
+            countriesState.value = countriesState.value.copy(isLoading = true)
+            val a = getCountriesUseCase.execute()
+            countriesState.value = countriesState.value.copy(isLoading = false, countries = a)
+        }
+    }
+
+    private fun testQuery() {
+        viewModelScope.launch {
+            val a = getCountriesUseCase.testExecute()
+            textState.value = a
         }
     }
 }

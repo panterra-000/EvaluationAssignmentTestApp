@@ -4,4 +4,5 @@ import mapp.test.core.data.CountryViewData
 
 interface LeadsService {
     suspend fun fetchCountries():List<CountryViewData>
+    suspend fun testQuery():String
 }

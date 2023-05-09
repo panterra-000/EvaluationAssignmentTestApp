@@ -1,0 +1,7 @@
+query FetchLeads{
+    fetchLeads{
+        cursor
+        hasMore
+        totalCount
+    }
+}
