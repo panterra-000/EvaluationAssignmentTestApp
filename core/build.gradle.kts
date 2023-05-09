@@ -1,6 +1,16 @@
 plugins {
     id("com.android.library")
+    id("com.apollographql.apollo3").version("3.7.3")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("dagger.hilt.android.plugin")
+
+}
+
+apollo {
+    service("service") {
+        packageName.set("mapp.test")
+    }
 }
 
 android {
@@ -42,5 +52,10 @@ dependencies {
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
 
+    api("com.apollographql.apollo3:apollo-runtime:3.7.3")
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+    implementation("com.google.dagger:hilt-android:2.42")
+    kapt("com.google.dagger:hilt-android-compiler:2.42")
+    kapt("androidx.hilt:hilt-compiler:1.0.0")
 }

@@ -1,16 +1,10 @@
 plugins {
     id("com.android.application")
     id("kotlin-android")
-    id("com.apollographql.apollo3").version("3.7.3")
     kotlin("kapt")
     id("dagger.hilt.android.plugin")
 }
 
-apollo {
-    service("service") {
-        packageName.set("mapp.test")
-    }
-}
 
 android {
     namespace = "mapp.test.evaluationassignmenttestapp"
@@ -30,9 +24,17 @@ android {
     }
 
     buildTypes {
+        getByName("debug") {
+            isMinifyEnabled = false
+            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "BASE_URL", "\"http://54.246.238.84:3000/graphql\"")
+            buildConfigField("String", "JWT", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlSWQiOjE0MDMsImZJZCI6IkRHcjVYMGZHNDdYQW9LUGkiLCJzSWQiOjQxLCJpYXQiOjE2ODMxNDA5MjcsImV4cCI6MTY4NDM1MDUyN30.oC5ka2mlWWoEIXmM7m_FnXjtEqKDzLTjAIu_fwcrA8Y\"")
+        }
         getByName("release") {
             isMinifyEnabled = false
             proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            buildConfigField("String", "BASE_URL", "\"http://54.246.238.84:3000/graphql\"")
+            buildConfigField("String", "JWT", "\"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlSWQiOjE0MDMsImZJZCI6IkRHcjVYMGZHNDdYQW9LUGkiLCJzSWQiOjQxLCJpYXQiOjE2ODMxNDA5MjcsImV4cCI6MTY4NDM1MDUyN30.oC5ka2mlWWoEIXmM7m_FnXjtEqKDzLTjAIu_fwcrA8Y\"")
         }
     }
     compileOptions {
@@ -64,7 +66,6 @@ dependencies {
     implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.3.1")
     implementation("androidx.activity:activity-compose:1.3.1")
 
-
     testImplementation("junit:junit:4.13.2")
     androidTestImplementation("androidx.test.ext:junit:1.1.5")
     androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
@@ -72,9 +73,7 @@ dependencies {
     debugImplementation("androidx.compose.ui:ui-tooling:1.2.0")
     debugImplementation("androidx.compose.ui:ui-test-manifest:1.2.0")
 
-    implementation("com.apollographql.apollo3:apollo-runtime:3.7.3")
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
-
     implementation("com.google.dagger:hilt-android:2.42")
     kapt("com.google.dagger:hilt-android-compiler:2.42")
     kapt("androidx.hilt:hilt-compiler:1.0.0")

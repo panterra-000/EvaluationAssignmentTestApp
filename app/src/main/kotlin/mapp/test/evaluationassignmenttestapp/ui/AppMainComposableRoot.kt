@@ -6,7 +6,6 @@ import androidx.compose.material.rememberScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import mapp.test.coreui.consts.LEADS_SCREEN_ROUTE
 import mapp.test.coreui.theme.PrimaryAppTheme
@@ -23,7 +22,6 @@ fun AppMainComposableRoot() {
     PrimaryAppTheme {
         Scaffold(
             scaffoldState = scaffoldState,
-            drawerGesturesEnabled = scaffoldState.drawerState.isOpen,
         ) {
             NavHost(
                 navController = navController,
