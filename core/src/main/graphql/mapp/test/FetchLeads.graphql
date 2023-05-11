@@ -3,8 +3,26 @@ query FetchLeads{
         cursor
         data {
             displayName
+            firstName
+            lastName
             createdAt
             updatedAt
+            intention {
+                id
+                title
+            }
+            status {
+                id
+                title
+            }
+            adSource {
+                id
+                title
+            }
+            channelSource {
+                id
+                title
+            }
             country {
               emoji
             }

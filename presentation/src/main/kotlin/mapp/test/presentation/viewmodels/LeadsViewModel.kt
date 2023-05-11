@@ -4,11 +4,13 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mapp.test.core.data.CountryViewData
 import mapp.test.core.data.LeadModel
 import mapp.test.core.domain.GetCountriesUseCase
 import mapp.test.core.domain.GetLeadsUseCase
+import mapp.test.core.util.AppNetworkResponse
 import mapp.test.core.util.myLogD
 import javax.inject.Inject
 
@@ -20,14 +22,10 @@ class LeadsViewModel @Inject constructor(
 
     val countriesState = mutableStateOf(CountriesDataState())
 
-    val leadsState = mutableStateOf(LeadsDataState())
+    val leadsState = mutableStateOf<AppNetworkResponse<List<LeadModel>>>(AppNetworkResponse.Loading)
 
     data class CountriesDataState(
         val isLoading: Boolean = true, val countries: List<CountryViewData> = listOf()
-    )
-
-    data class LeadsDataState(
-        val isLoading: Boolean = false, val leads: List<LeadModel> = emptyList()
     )
 
     init {
@@ -44,10 +42,10 @@ class LeadsViewModel @Inject constructor(
 
     private fun getLeads() {
         viewModelScope.launch {
-            leadsState.value = leadsState.value.copy(isLoading = true)
+            delay(2000)
             val resp = getLeadsUseCase.execute()
+            leadsState.value = resp
             myLogD(msg = resp.toString())
-            leadsState.value = leadsState.value.copy(isLoading = false, leads = resp)
         }
     }
 

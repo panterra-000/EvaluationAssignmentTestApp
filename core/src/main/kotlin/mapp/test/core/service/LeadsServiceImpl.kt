@@ -1,13 +1,14 @@
 package mapp.test.core.service
 
 import com.apollographql.apollo3.ApolloClient
-import com.apollographql.apollo3.api.http.HttpHeader
+import com.apollographql.apollo3.exception.ApolloException
 import mapp.test.FetchCountriesQuery
 import mapp.test.FetchLeadsQuery
 import mapp.test.core.data.CountryViewData
 import mapp.test.core.data.LeadModel
 import mapp.test.core.mappers.mapToCountryModelList
 import mapp.test.core.mappers.mapToLeadsModelList
+import mapp.test.core.util.AppNetworkResponse
 import mapp.test.core.util.myLogD
 
 class LeadsServiceImpl(
@@ -23,13 +24,15 @@ class LeadsServiceImpl(
         }
     }
 
-    override suspend fun fetchLeads(): List<LeadModel> {
+    override suspend fun fetchLeads(): AppNetworkResponse<List<LeadModel>> {
         return try {
-            apolloClient.query(FetchLeadsQuery()).execute().data?.fetchLeads?.mapToLeadsModelList()
+            val resp = apolloClient.query(FetchLeadsQuery())
+                .execute().data?.fetchLeads?.mapToLeadsModelList()
                 ?: emptyList()
-        } catch (e: Exception) {
+            AppNetworkResponse.Success(resp)
+        } catch (e: ApolloException) {
             myLogD("Error: $e")
-            emptyList()
+            AppNetworkResponse.Error(message = e.message.toString())
         }
     }
 }

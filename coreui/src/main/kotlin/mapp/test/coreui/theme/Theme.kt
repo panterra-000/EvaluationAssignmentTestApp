@@ -2,46 +2,62 @@ package mapp.test.coreui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.darkColors
-import androidx.compose.material.lightColors
+import androidx.compose.material.Typography
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.Immutable
+import androidx.compose.runtime.staticCompositionLocalOf
+import androidx.compose.ui.graphics.Color
 
-private val DarkColorPalette = darkColors(
-    primary = Purple200,
-    primaryVariant = Purple700,
-    secondary = Teal200
-)
-
-private val LightColorPalette = lightColors(
-    primary = Purple500,
-    primaryVariant = Purple700,
-    secondary = Teal200
-
-    /* Other default colors to override
-    background = Color.White,
-    surface = Color.White,
-    onPrimary = Color.White,
-    onSecondary = Color.Black,
-    onBackground = Color.Black,
-    onSurface = Color.Black,
-    */
+@Immutable
+data class TestAppColors(
+    val primaryText: Color,
+    val primaryTitleText: Color,
+    val avatarTitleText: Color,
+    val primary: Color,
+    val primaryVariant: Color,
+    val surface: Color,
+    val onPrimary: Color,
+    val onSurface: Color,
+    val onBackground: Color,
+    val primaryTint: Color,
+    val primaryBackground: Color,
+    val avatarTopGradient:Color,
+    val avatarBottomGradient:Color,
 )
 
 @Composable
 fun PrimaryAppTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
+    colors: TestAppColors = ThemeColor.getColors(darkTheme),
     content: @Composable () -> Unit
 ) {
-    val colors = if (darkTheme) {
-        DarkColorPalette
-    } else {
-        LightColorPalette
+    CompositionLocalProvider(
+        LocalColors provides colors
+    ) {
+        MaterialTheme(
+            colors = MaterialTheme.colors.copy(
+                primary = colors.primary,
+                primaryVariant = colors.primaryVariant,
+                surface = colors.surface,
+                onPrimary = colors.onPrimary,
+                onSurface = colors.onSurface,
+                onBackground = colors.onSurface,
+            ), typography = Typography, shapes = Shapes, content = content
+        )
     }
+}
 
-    MaterialTheme(
-        colors = colors,
-        typography = Typography,
-        shapes = Shapes,
-        content = content
-    )
+val LocalColors = staticCompositionLocalOf<TestAppColors> {
+    error("No LocalColors specified")
+}
+
+object TestAppTheme {
+    val colors: TestAppColors
+        @Composable
+        get() = LocalColors.current
+
+    val typography: Typography
+        @Composable
+        get() = MaterialTheme.typography
 }

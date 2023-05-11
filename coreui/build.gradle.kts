@@ -53,5 +53,6 @@ dependencies {
     api("androidx.compose.ui:ui-tooling-preview:1.2.0")
     api("androidx.compose.material:material:1.2.0")
     api("androidx.hilt:hilt-navigation-compose:1.0.0")
+    api("io.coil-kt:coil-compose:2.0.0-rc01")
 
 }
