@@ -13,15 +13,15 @@ object ThemeColor {
     }
 
     private val themeLight = TestAppColors(
-        primary = Color(0xFFf3f4f6),
-        onPrimary = Color(0xFFf3f4f6),
+        primary = Color(0xFFFFFFFF),
+        onPrimary = Color(0xFF9C9DAF),
         primaryText = Color(0xFF9C9DAF),
         avatarTitleText = Color(0xFFFFFFFF),
         primaryTitleText = Color(0xFF00022F),
-        primaryVariant = Color(0xFFf3f4f6),
-        onBackground = Color(0xFFf3f4f6),
-        onSurface = Color(0xFFf3f4f6),
-        surface = Color(0xFFf3f4f6),
+        primaryVariant = Color(0xFF123341),
+        onBackground = Color(0xFFFFFFFF),
+        onSurface = Color(0xFFFFFFFF),
+        surface = Color(0xFFFFFFFF),
         primaryTint = Color(0xFFF5F5F8),
         primaryIconTint = Color(0xFF9C9DAF),
         primaryBackground = Color(0xFFFFFFFF),

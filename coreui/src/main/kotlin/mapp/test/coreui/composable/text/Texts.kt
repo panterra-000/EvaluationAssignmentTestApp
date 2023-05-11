@@ -18,3 +18,17 @@ fun Text20sp(
         color = color
     )
 }
+
+
+
+@Composable
+fun Text18spInactive(
+    text: String,
+    color: Color = TestAppTheme.colors.primaryText
+) {
+    Text(
+        text = text,
+        fontSize = 18.sp,
+        color = color
+    )
+}

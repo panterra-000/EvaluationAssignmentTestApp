@@ -23,6 +23,9 @@ class LeadsViewModel @Inject constructor(
 
     val countriesState = mutableStateOf(CountriesDataState())
 
+    private val _isRefreshingState = mutableStateOf(false)
+    val isRefreshingState: State<Boolean> get() = _isRefreshingState
+
     private val _leadsState =
         mutableStateOf<AppNetworkResponse<List<LeadModel>>>(AppNetworkResponse.Loading)
     val leadsState: State<AppNetworkResponse<List<LeadModel>>> get() = _leadsState
@@ -43,11 +46,14 @@ class LeadsViewModel @Inject constructor(
         }
     }
 
-    private fun getLeads() {
+    fun getLeads() {
+        _isRefreshingState.value = true
+        _leadsState.value = AppNetworkResponse.Loading
         viewModelScope.launch {
             delay(500)
             val resp = getLeadsUseCase.execute()
             _leadsState.value = resp
+            _isRefreshingState.value = false
             myLogD(msg = resp.toString())
         }
     }

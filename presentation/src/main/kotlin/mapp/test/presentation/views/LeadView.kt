@@ -13,6 +13,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import mapp.test.core.data.LeadModel
@@ -28,6 +29,7 @@ import mapp.test.coreui.composable.text.ActiveTitleText18sp
 import mapp.test.coreui.composable.text.PrimaryBoldText15sp
 import mapp.test.coreui.composable.text.PrimaryChipText14sp
 import mapp.test.coreui.composable.text.Text20sp
+import mapp.test.presentation.R
 
 @Composable
 fun LeadView(leadModel: LeadModel, onclick: () -> Unit) {
@@ -38,9 +40,7 @@ fun LeadView(leadModel: LeadModel, onclick: () -> Unit) {
         Spacer10dp()
         Column(Modifier.padding(start = 13.dp)) {
             Row(
-                modifier = Modifier
-                    .fillMaxWidth(),
-                verticalAlignment = Alignment.CenterVertically
+                modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
             ) {
                 AvatarImageView(title = leadModel.avatarName, avatarImageUrl = leadModel.avatarUrl)
                 Spacer13dp()
@@ -71,8 +71,8 @@ fun LeadView(leadModel: LeadModel, onclick: () -> Unit) {
                 }
             }
             Spacer12dp()
-            PrimaryBoldText15sp(text = "Created date: ${leadModel.createdAt}")
-            PrimaryBoldText15sp(text = "Updated date: ${leadModel.updatedAt}")
+            PrimaryBoldText15sp(text = "${stringResource(id = mapp.test.coreui.R.string.created_date_title)} ${leadModel.createdAt}")
+            PrimaryBoldText15sp(text = "${stringResource(id = mapp.test.coreui.R.string.updated_date_title)} ${leadModel.updatedAt}")
         }
         Spacer10dp()
         DividerMin()

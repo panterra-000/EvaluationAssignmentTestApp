@@ -2,5 +2,8 @@
     <string name="app_name">EvaluationAssignmentTestApp</string>
 
     <string name="create_new_lead">Create new lead</string>
+    <string name="created_date_title">Created date:</string>
+    <string name="updated_date_title">Updated date:</string>
+    <string name="loading_title">Loading...</string>
 
 </resources>
