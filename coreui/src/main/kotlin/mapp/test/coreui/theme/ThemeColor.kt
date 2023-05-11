@@ -23,6 +23,7 @@ object ThemeColor {
         onSurface = Color(0xFFf3f4f6),
         surface = Color(0xFFf3f4f6),
         primaryTint = Color(0xFFF5F5F8),
+        primaryIconTint = Color(0xFF9C9DAF),
         primaryBackground = Color(0xFFFFFFFF),
         avatarTopGradient = Color(0xFFABF0FF),
         avatarBottomGradient = Color(0xFF27B1FF),

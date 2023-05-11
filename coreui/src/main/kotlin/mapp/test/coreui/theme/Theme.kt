@@ -22,8 +22,9 @@ data class TestAppColors(
     val onBackground: Color,
     val primaryTint: Color,
     val primaryBackground: Color,
-    val avatarTopGradient:Color,
-    val avatarBottomGradient:Color,
+    val avatarTopGradient: Color,
+    val avatarBottomGradient: Color,
+    val primaryIconTint: Color,
 )
 
 @Composable

@@ -1,5 +1,6 @@
 package mapp.test.presentation.viewmodels
 
+import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -22,7 +23,9 @@ class LeadsViewModel @Inject constructor(
 
     val countriesState = mutableStateOf(CountriesDataState())
 
-    val leadsState = mutableStateOf<AppNetworkResponse<List<LeadModel>>>(AppNetworkResponse.Loading)
+    private val _leadsState =
+        mutableStateOf<AppNetworkResponse<List<LeadModel>>>(AppNetworkResponse.Loading)
+    val leadsState: State<AppNetworkResponse<List<LeadModel>>> get() = _leadsState
 
     data class CountriesDataState(
         val isLoading: Boolean = true, val countries: List<CountryViewData> = listOf()
@@ -42,9 +45,9 @@ class LeadsViewModel @Inject constructor(
 
     private fun getLeads() {
         viewModelScope.launch {
-            delay(2000)
+            delay(500)
             val resp = getLeadsUseCase.execute()
-            leadsState.value = resp
+            _leadsState.value = resp
             myLogD(msg = resp.toString())
         }
     }
