@@ -5,7 +5,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import mapp.test.core.data.CountryViewData
 import mapp.test.core.data.LeadModel
@@ -50,13 +49,11 @@ class LeadsViewModel @Inject constructor(
         _isRefreshingState.value = true
         _leadsState.value = AppNetworkResponse.Loading
         viewModelScope.launch {
-            delay(500)
             val resp = getLeadsUseCase.execute()
             _leadsState.value = resp
             _isRefreshingState.value = false
             myLogD(msg = resp.toString())
         }
     }
-
 
 }

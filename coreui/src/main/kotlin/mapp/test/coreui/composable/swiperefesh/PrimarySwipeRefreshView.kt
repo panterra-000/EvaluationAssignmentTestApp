@@ -2,7 +2,6 @@ package mapp.test.coreui.composable.swiperefesh
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -18,7 +17,7 @@ fun PrimarySwipeRefreshColumn(
 ) {
     SwipeRefresh(
         state = rememberSwipeRefreshState(isRefreshing),
-        modifier = Modifier.fillMaxWidth(),
+        modifier = Modifier.fillMaxSize(),
         onRefresh = {
             refresh()
         },

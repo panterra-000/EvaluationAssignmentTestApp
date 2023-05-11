@@ -68,3 +68,18 @@ fun PrimaryBoldText15sp(
         color = color
     )
 }
+
+@Composable
+fun PrimaryTitleText18sp(
+    text: String ,
+    alignCenter: Boolean = false,
+    color: Color = TestAppTheme.colors.primaryTitleText
+) {
+    Text(
+        text = text,
+        fontSize = 18.sp,
+        fontWeight = FontWeight(400),
+        color = color,
+        textAlign = if (alignCenter) TextAlign.Center else TextAlign.Start
+    )
+}
