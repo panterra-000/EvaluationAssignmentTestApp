@@ -9,5 +9,4 @@ class GetCountriesUseCase(
     suspend fun execute(): List<CountryViewData> {
         return service.fetchCountries().sortedBy { it.name }
     }
-
 }

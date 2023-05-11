@@ -1,0 +1,27 @@
+query FetchLeads{
+    fetchLeads{
+        cursor
+        data {
+            displayName
+            createdAt
+            updatedAt
+            country {
+              emoji
+            }
+            avatar {
+                createdAt
+                id
+                mimeType
+                name
+                path
+                resolution
+                size
+                thumbnail
+                updatedAt
+            }
+
+        }
+        hasMore
+        totalCount
+    }
+}

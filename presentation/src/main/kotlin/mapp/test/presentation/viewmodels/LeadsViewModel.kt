@@ -6,26 +6,32 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import mapp.test.core.data.CountryViewData
+import mapp.test.core.data.LeadModel
 import mapp.test.core.domain.GetCountriesUseCase
+import mapp.test.core.domain.GetLeadsUseCase
 import mapp.test.core.util.myLogD
 import javax.inject.Inject
 
 @HiltViewModel
 class LeadsViewModel @Inject constructor(
-    private val getCountriesUseCase: GetCountriesUseCase
+    private val getCountriesUseCase: GetCountriesUseCase,
+    private val getLeadsUseCase: GetLeadsUseCase
 ) : ViewModel() {
 
     val countriesState = mutableStateOf(CountriesDataState())
 
-    val textState = mutableStateOf("")
+    val leadsState = mutableStateOf(LeadsDataState())
 
     data class CountriesDataState(
-        val isLoading: Boolean = true,
-        val countries: List<CountryViewData> = listOf()
+        val isLoading: Boolean = true, val countries: List<CountryViewData> = listOf()
+    )
+
+    data class LeadsDataState(
+        val isLoading: Boolean = false, val leads: List<LeadModel> = emptyList()
     )
 
     init {
-        getCountries()
+        getLeads()
     }
 
     private fun getCountries() {
@@ -35,5 +41,15 @@ class LeadsViewModel @Inject constructor(
             countriesState.value = countriesState.value.copy(isLoading = false, countries = a)
         }
     }
+
+    private fun getLeads() {
+        viewModelScope.launch {
+            leadsState.value = leadsState.value.copy(isLoading = true)
+            val resp = getLeadsUseCase.execute()
+            myLogD(msg = resp.toString())
+            leadsState.value = leadsState.value.copy(isLoading = false, leads = resp)
+        }
+    }
+
 
 }

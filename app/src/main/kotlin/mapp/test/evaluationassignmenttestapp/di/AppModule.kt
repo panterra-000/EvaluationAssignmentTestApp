@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import mapp.test.core.domain.GetCountriesUseCase
+import mapp.test.core.domain.GetLeadsUseCase
 import mapp.test.core.service.LeadsService
 import mapp.test.core.service.LeadsServiceImpl
 import mapp.test.evaluationassignmenttestapp.BuildConfig
@@ -55,4 +56,9 @@ object AppModule {
         return GetCountriesUseCase(leadsService)
     }
 
+    @Provides
+    @Singleton
+    fun provideGetLeadsUseCase(leadsService: LeadsService): GetLeadsUseCase {
+        return GetLeadsUseCase(leadsService)
+    }
 }
