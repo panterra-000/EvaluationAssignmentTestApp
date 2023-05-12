@@ -5,9 +5,14 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import mapp.test.coreui.composable.Spacer18dp
 import mapp.test.coreui.composable.Spacer20dp
+import mapp.test.coreui.composable.box.PrimaryBoxMaxSize
+import mapp.test.coreui.composable.buttons.PrimaryButtonInRow
+import mapp.test.coreui.composable.buttons.SecondaryButtonInRow
 import mapp.test.coreui.composable.custom.PrimaryScrollableColumnBodyWithAppBar
 import mapp.test.coreui.composable.row.PrimaryRowMaxWith
+import mapp.test.coreui.composable.row.PrimaryRowMaxWithInBox
 import mapp.test.coreui.composable.textfields.OutLineTextFieldInRow
 import mapp.test.coreui.composable.textfields.TextFieldDisabledClickable
 import mapp.test.coreui.composable.textfields.TextFieldFillMaxWidth
@@ -21,63 +26,76 @@ fun CreateLeadScreen(
 ) {
 
     val context = LocalContext.current
+    PrimaryBoxMaxSize {
+        PrimaryScrollableColumnBodyWithAppBar(
+            title = stringResource(id = mapp.test.coreui.R.string.lead_information),
+            backClick = {
+                navController.navigateUp()
+            }) {
 
-    PrimaryScrollableColumnBodyWithAppBar(
-        title = stringResource(id = mapp.test.coreui.R.string.lead_information),
-        backClick = {
-            navController.navigateUp()
-        }) {
-
-        PrimaryRowMaxWith {
-            OutLineTextFieldInRow(labelText = "First Name", textState = viewModel.firstNameState)
-            Spacer20dp()
-            OutLineTextFieldInRow(labelText = "Last name", textState = viewModel.lastNameState)
-        }
-
-        TextFieldDisabledClickable(
-            labelText = "Lead Intention type",
-            textState = viewModel.intentionTypeState,
-            onclick = {
-                viewModel.intentionTypeState.value = "edited"
+            PrimaryRowMaxWith {
+                OutLineTextFieldInRow(
+                    labelText = "First Name",
+                    textState = viewModel.firstNameState
+                )
+                Spacer18dp()
+                OutLineTextFieldInRow(labelText = "Last name", textState = viewModel.lastNameState)
             }
-        )
 
-        TextFieldDisabledClickable(
-            labelText = "Country",
-            textState = viewModel.countryState,
-            onclick = {
-                viewModel.countryState.value = "edited"
-            }
-        )
-
-        PrimaryRowMaxWith {
-            TextFieldInRowDisabledClickableInRow(
-                labelText = "City",
-                textState = viewModel.cityState,
+            TextFieldDisabledClickable(
+                labelText = "Lead Intention type",
+                textState = viewModel.intentionTypeState,
                 onclick = {
-                    viewModel.cityState.value = "edited City"
+                    viewModel.intentionTypeState.value = "edited"
                 }
             )
-            Spacer20dp()
-            TextFieldInRowDisabledClickableInRow(
-                labelText = "Language",
-                textState = viewModel.languageState,
+
+            TextFieldDisabledClickable(
+                labelText = "Country",
+                textState = viewModel.countryState,
                 onclick = {
-                    viewModel.languageState.value = "edited Language"
+                    viewModel.countryState.value = "edited"
+                }
+            )
+
+            PrimaryRowMaxWith {
+                TextFieldInRowDisabledClickableInRow(
+                    labelText = "City",
+                    textState = viewModel.cityState,
+                    onclick = {
+                        viewModel.cityState.value = "edited City"
+                    }
+                )
+                Spacer20dp()
+                TextFieldInRowDisabledClickableInRow(
+                    labelText = "Language",
+                    textState = viewModel.languageState,
+                    onclick = {
+                        viewModel.languageState.value = "edited Language"
+                    }
+                )
+            }
+
+            TextFieldFillMaxWidth(labelText = "Number", textState = viewModel.phoneState)
+            TextFieldFillMaxWidth(labelText = "Email", textState = viewModel.emailState)
+
+            TextFieldDisabledClickable(
+                labelText = "Source",
+                textState = viewModel.sourceState,
+                onclick = {
+                    viewModel.sourceState.value = "edited Source"
                 }
             )
         }
 
-        TextFieldFillMaxWidth(labelText = "Number",textState = viewModel.phoneState)
-        TextFieldFillMaxWidth(labelText = "Email",textState = viewModel.emailState)
+        PrimaryRowMaxWithInBox {
+            SecondaryButtonInRow("Cancel") {
 
-        TextFieldDisabledClickable(
-            labelText = "Source",
-            textState = viewModel.sourceState,
-            onclick = {
-                viewModel.sourceState.value = "edited Source"
             }
-        )
+            Spacer18dp()
+            PrimaryButtonInRow("Save") {
 
+            }
+        }
     }
 }

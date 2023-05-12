@@ -16,11 +16,15 @@ object ThemeColor {
         primary = Color(0xFF123341),
         onPrimary = Color(0xFF9C9DAF),
         primaryText = Color(0xFF9C9DAF),
+        buttonText = Color(0xFFFFFFFF),
+        secondaryButtonText = Color(0xFF9E95FF),
+        primaryButtonBackground = Color(0xFF9E95FF),
+        secondaryButtonBackground = Color(0xFFFFFFFF),
         avatarTitleText = Color(0xFFFFFFFF),
         primaryTitleText = Color(0xFF00022F),
         primaryVariant = Color(0xFF123341),
         onBackground = Color(0xFFC8C9D9),
-        onSurface = Color(0xFFC8C9D9),
+        onSurface = Color(0xFFFFFFFF),
         surface = Color(0xFFC8C9D9),
         primaryTint = Color(0xFFF5F5F8),
         primaryIconTint = Color(0xFF9C9DAF),
@@ -32,6 +36,7 @@ object ThemeColor {
         focusedLabelColor = Color(0xFFA0A1B5),
         unFocusedLabelColor = Color(0xFFA0A1B5),
         trailingIcon = Color(0xFFC8C9D9),
+        textFieldFont = Color(0xFFC8C9D9),
 
         )
 

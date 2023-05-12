@@ -12,6 +12,10 @@ import androidx.compose.ui.graphics.Color
 @Immutable
 data class TestAppColors(
     val primaryText: Color,
+    val buttonText: Color,
+    val secondaryButtonText: Color,
+    val primaryButtonBackground: Color,
+    val secondaryButtonBackground: Color,
     val primaryTitleText: Color,
     val avatarTitleText: Color,
     val primary: Color,
@@ -30,6 +34,7 @@ data class TestAppColors(
     val focusedBorderColor: Color,
     val focusedLabelColor: Color,
     val unFocusedLabelColor: Color,
+    val textFieldFont: Color,
 )
 
 @Composable

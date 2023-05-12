@@ -28,7 +28,7 @@ fun TextFieldFillMaxWidth(labelText: String = "", textState: MutableState<String
             unfocusedLabelColor = TestAppTheme.colors.unFocusedLabelColor,
             focusedLabelColor = TestAppTheme.colors.focusedLabelColor,
         ),
-        textStyle = TextStyle(fontSize = 16.sp),
+        textStyle = TextStyle(fontSize = 16.sp, color = TestAppTheme.colors.textFieldFont),
         value = textState.value,
         label = { Text(text = labelText) },
         onValueChange = {
@@ -51,7 +51,7 @@ fun RowScope.OutLineTextFieldInRow(labelText: String = "", textState: MutableSta
             focusedLabelColor = TestAppTheme.colors.focusedLabelColor,
         ),
         maxLines = 1,
-        textStyle = TextStyle(fontSize = 16.sp),
+        textStyle = TextStyle(fontSize = 16.sp, color = TestAppTheme.colors.textFieldFont),
         value = textState.value,
         label = { Text(text = labelText) },
         onValueChange = {
@@ -78,7 +78,7 @@ fun TextFieldDisabledClickable(
             textColor = TestAppTheme.colors.focusedLabelColor
         ),
         maxLines = 1,
-        textStyle = TextStyle(fontSize = 16.sp),
+        textStyle = TextStyle(fontSize = 16.sp, color = TestAppTheme.colors.textFieldFont),
         value = textState.value,
         enabled = false,
         trailingIcon = {
@@ -112,7 +112,7 @@ fun RowScope.TextFieldInRowDisabledClickableInRow(
             textColor = TestAppTheme.colors.focusedLabelColor
         ),
         maxLines = 1,
-        textStyle = TextStyle(fontSize = 16.sp),
+        textStyle = TextStyle(fontSize = 16.sp, color = TestAppTheme.colors.textFieldFont),
         value = textState.value,
         enabled = false,
         trailingIcon = {
