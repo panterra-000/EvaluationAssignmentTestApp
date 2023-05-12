@@ -25,6 +25,11 @@ data class TestAppColors(
     val avatarTopGradient: Color,
     val avatarBottomGradient: Color,
     val primaryIconTint: Color,
+    val trailingIcon: Color,
+    val unFocusedBorderColor: Color,
+    val focusedBorderColor: Color,
+    val focusedLabelColor: Color,
+    val unFocusedLabelColor: Color,
 )
 
 @Composable
