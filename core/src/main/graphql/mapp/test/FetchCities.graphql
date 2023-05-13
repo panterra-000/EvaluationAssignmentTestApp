@@ -1,0 +1,6 @@
+query FetchCities($countryId:Int!){
+    cities(countryId: $countryId){
+        id
+        title
+    }
+}

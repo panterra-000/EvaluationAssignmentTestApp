@@ -4,7 +4,7 @@ import com.apollographql.apollo3.ApolloClient
 import com.apollographql.apollo3.exception.ApolloException
 import mapp.test.FetchCountriesQuery
 import mapp.test.FetchLeadsQuery
-import mapp.test.core.data.CountryViewData
+import mapp.test.core.data.CountryModel
 import mapp.test.core.data.LeadModel
 import mapp.test.core.mappers.mapToCountryModelList
 import mapp.test.core.mappers.mapToLeadsModelList
@@ -15,7 +15,7 @@ class LeadsServiceImpl(
     private val apolloClient: ApolloClient
 ) : LeadsService {
 
-    override suspend fun fetchCountries(): List<CountryViewData> {
+    override suspend fun fetchCountries(): List<CountryModel> {
         return try {
             apolloClient.query(FetchCountriesQuery())
                 .execute().data?.fetchCountries?.mapToCountryModelList() ?: emptyList()

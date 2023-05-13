@@ -1,0 +1,7 @@
+query FetchLanguages{
+    languages {
+        id
+        shortCode
+        title
+    }
+}

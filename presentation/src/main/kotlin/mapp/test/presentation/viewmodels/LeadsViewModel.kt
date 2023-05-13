@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import mapp.test.core.data.CountryViewData
+import mapp.test.core.data.CountryModel
 import mapp.test.core.data.LeadModel
 import mapp.test.core.domain.GetCountriesUseCase
 import mapp.test.core.domain.GetLeadsUseCase
@@ -30,7 +30,7 @@ class LeadsViewModel @Inject constructor(
     val leadsState: State<AppNetworkResponse<List<LeadModel>>> get() = _leadsState
 
     data class CountriesDataState(
-        val isLoading: Boolean = true, val countries: List<CountryViewData> = listOf()
+        val isLoading: Boolean = true, val countries: List<CountryModel> = listOf()
     )
 
     init {

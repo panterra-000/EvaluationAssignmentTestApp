@@ -1,8 +1,11 @@
 package mapp.test.core.mappers
 
 import mapp.test.FetchLeadsQuery
-import mapp.test.core.data.AdditionalModel
+import mapp.test.core.data.AdSourceModel
+import mapp.test.core.data.ChannelSourceModel
+import mapp.test.core.data.IntentionModel
 import mapp.test.core.data.LeadModel
+import mapp.test.core.data.StatusModel
 import mapp.test.core.util.changeDateFormat
 
 fun FetchLeadsQuery.Data1.toLeadViewData(): LeadModel {
@@ -28,26 +31,26 @@ fun FetchLeadsQuery.FetchLeads.mapToLeadsModelList(): List<LeadModel> {
     }
 }
 
-fun FetchLeadsQuery.Intention.toModel(): AdditionalModel? {
+fun FetchLeadsQuery.Intention.toModel(): IntentionModel? {
     return if (this.id != null && this.title != null) {
-        return AdditionalModel(title = this.title, id = this.id)
+        return IntentionModel(title = this.title, id = this.id)
     } else null
 }
 
-fun FetchLeadsQuery.Status.toModel(): AdditionalModel? {
+fun FetchLeadsQuery.Status.toModel(): StatusModel? {
     return if (this.id != null && this.title != null) {
-        return AdditionalModel(title = this.title, id = this.id)
+        return StatusModel(title = this.title, id = this.id)
     } else null
 }
 
-fun FetchLeadsQuery.AdSource.toModel(): AdditionalModel? {
+fun FetchLeadsQuery.AdSource.toModel(): AdSourceModel? {
     return if (this.id != null && this.title != null) {
-        return AdditionalModel(title = this.title, id = this.id)
+        return AdSourceModel(title = this.title, id = this.id)
     } else null
 }
 
-fun FetchLeadsQuery.ChannelSource.toModel(): AdditionalModel? {
+fun FetchLeadsQuery.ChannelSource.toModel(): ChannelSourceModel? {
     return if (this.id != null && this.title != null) {
-        return AdditionalModel(title = this.title, id = this.id)
+        return ChannelSourceModel(title = this.title, id = this.id)
     } else null
 }

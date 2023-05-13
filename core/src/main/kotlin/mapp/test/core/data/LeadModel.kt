@@ -9,13 +9,8 @@ data class LeadModel(
     val avatarName: String = "",
     val createdAt: String = "",
     val updatedAt: String = "",
-    val intention: AdditionalModel? = null,
-    val status: AdditionalModel? = null,
-    val adSource: AdditionalModel? = null,
-    val channelSource: AdditionalModel? = null,
-)
-
-data class AdditionalModel(
-    val id: Int,
-    val title: String
+    val intention: IntentionModel? = null,
+    val status: StatusModel? = null,
+    val adSource: AdSourceModel? = null,
+    val channelSource: ChannelSourceModel? = null,
 )

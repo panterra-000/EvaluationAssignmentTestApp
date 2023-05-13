@@ -13,11 +13,11 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import mapp.test.core.data.CountryViewData
+import mapp.test.core.data.CountryModel
 
 @Composable
 private fun CountryItem(
-    country: CountryViewData,
+    country: CountryModel,
 ) {
     Column(Modifier.fillMaxWidth()) {
         Row(
@@ -34,7 +34,7 @@ private fun CountryItem(
                 fontSize = 24.sp
             )
             Spacer(modifier = Modifier.width(16.dp))
-            Text(text = country.code, fontSize = 18.sp, color = Color.Red)
+            Text(text = country.phoneCode, fontSize = 18.sp, color = Color.Red)
         }
         Divider(color = Color.Blue, thickness = 1.dp)
     }

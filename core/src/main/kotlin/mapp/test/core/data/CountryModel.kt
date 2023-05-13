@@ -1,7 +1,8 @@
 package mapp.test.core.data
 
-data class CountryViewData(
+data class CountryModel(
+    val id: Int,
     val name: String,
-    val code: String = "",
+    val phoneCode: String = "",
     val emoji: String = "",
 )

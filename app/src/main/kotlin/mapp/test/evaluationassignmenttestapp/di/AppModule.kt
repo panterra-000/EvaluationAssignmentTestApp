@@ -10,6 +10,8 @@ import mapp.test.core.domain.GetCountriesUseCase
 import mapp.test.core.domain.GetLeadsUseCase
 import mapp.test.core.service.LeadsService
 import mapp.test.core.service.LeadsServiceImpl
+import mapp.test.core.service.createlead.CreateLeadService
+import mapp.test.core.service.createlead.CreateLeadServiceImpl
 import mapp.test.evaluationassignmenttestapp.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -48,6 +50,12 @@ object AppModule {
     @Singleton
     fun provideLeadsService(apolloClient: ApolloClient): LeadsService {
         return LeadsServiceImpl(apolloClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreateLeadService(apolloClient: ApolloClient): CreateLeadService {
+        return CreateLeadServiceImpl(apolloClient)
     }
 
     @Provides
