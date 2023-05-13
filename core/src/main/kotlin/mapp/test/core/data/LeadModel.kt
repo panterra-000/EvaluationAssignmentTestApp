@@ -9,7 +9,7 @@ data class LeadModel(
     val avatarName: String = "",
     val createdAt: String = "",
     val updatedAt: String = "",
-    val intention: IntentionModel? = null,
+    val intention: IntentionTypeModel? = null,
     val status: StatusModel? = null,
     val adSource: AdSourceModel? = null,
     val channelSource: ChannelSourceModel? = null,

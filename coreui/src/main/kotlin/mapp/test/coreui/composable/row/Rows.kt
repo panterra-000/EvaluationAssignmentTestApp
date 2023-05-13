@@ -28,6 +28,23 @@ fun PrimaryRowMaxWith(
 
 
 @Composable
+fun PrimaryRowMaxWithVerticalAlignCenter(
+    horizontalPadding: Dp = 0.dp,
+    verticalPadding: Dp = 0.dp,
+    content: @Composable RowScope.() -> Unit
+) {
+    Row(
+        Modifier
+            .fillMaxWidth()
+            .padding(horizontal = horizontalPadding, vertical = verticalPadding),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        content()
+    }
+}
+
+
+@Composable
 fun BoxScope.PrimaryRowMaxWithInBox(
     horizontalPadding: Dp = 18.dp,
     verticalPadding: Dp = 18.dp,

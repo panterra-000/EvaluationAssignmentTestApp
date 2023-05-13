@@ -35,6 +35,8 @@ data class TestAppColors(
     val focusedLabelColor: Color,
     val unFocusedLabelColor: Color,
     val textFieldFont: Color,
+    val dialogOverFlowBackground: Color,
+    val dialogBodyBackground: Color,
 )
 
 @Composable

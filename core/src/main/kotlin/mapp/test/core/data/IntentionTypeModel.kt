@@ -1,5 +1,5 @@
 package mapp.test.core.data
 
-data class IntentionModel(
+data class IntentionTypeModel(
     val id: Int, val title: String
 )

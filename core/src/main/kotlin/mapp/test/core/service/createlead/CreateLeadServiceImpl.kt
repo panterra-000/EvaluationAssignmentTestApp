@@ -10,7 +10,7 @@ import mapp.test.FetchLanguagesQuery
 import mapp.test.core.data.AdSourceModel
 import mapp.test.core.data.CityModel
 import mapp.test.core.data.CountryModel
-import mapp.test.core.data.IntentionModel
+import mapp.test.core.data.IntentionTypeModel
 import mapp.test.core.data.LanguageModel
 import mapp.test.core.mappers.mapToAdSourceModelList
 import mapp.test.core.mappers.mapToCityModelList
@@ -24,7 +24,7 @@ class CreateLeadServiceImpl(
     private val apolloClient: ApolloClient
 ) : CreateLeadService {
 
-    override suspend fun fetchIntentionTypes(): AppNetworkResponse<List<IntentionModel>> {
+    override suspend fun fetchIntentionTypes(): AppNetworkResponse<List<IntentionTypeModel>> {
         return try {
             val resp = apolloClient.query(FetchIntentionTypesQuery())
                 .execute().data?.fetchLeadIntentionTypes?.mapToIntentionTypeModelList()

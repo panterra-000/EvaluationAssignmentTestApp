@@ -6,8 +6,12 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import mapp.test.core.domain.GetCountriesUseCase
 import mapp.test.core.domain.GetLeadsUseCase
+import mapp.test.core.domain.createlead.GetAdSourcesUseCase
+import mapp.test.core.domain.createlead.GetCitiesUseCase
+import mapp.test.core.domain.createlead.GetCountriesUseCase
+import mapp.test.core.domain.createlead.GetIntentionTypesUseCase
+import mapp.test.core.domain.createlead.GetLanguagesUseCase
 import mapp.test.core.service.LeadsService
 import mapp.test.core.service.LeadsServiceImpl
 import mapp.test.core.service.createlead.CreateLeadService
@@ -52,6 +56,13 @@ object AppModule {
         return LeadsServiceImpl(apolloClient)
     }
 
+
+    @Provides
+    @Singleton
+    fun provideGetLeadsUseCase(leadsService: LeadsService): GetLeadsUseCase {
+        return GetLeadsUseCase(leadsService)
+    }
+
     @Provides
     @Singleton
     fun provideCreateLeadService(apolloClient: ApolloClient): CreateLeadService {
@@ -60,13 +71,33 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideGetCountriesUseCase(leadsService: LeadsService): GetCountriesUseCase {
-        return GetCountriesUseCase(leadsService)
+    fun provideGetIntentionTypesUseCase(service: CreateLeadService): GetIntentionTypesUseCase {
+        return GetIntentionTypesUseCase(service)
     }
 
     @Provides
     @Singleton
-    fun provideGetLeadsUseCase(leadsService: LeadsService): GetLeadsUseCase {
-        return GetLeadsUseCase(leadsService)
+    fun provideGetCountriesUseCase(service: CreateLeadService): GetCountriesUseCase {
+        return GetCountriesUseCase(service)
     }
+
+    @Provides
+    @Singleton
+    fun provideGetCitiesUseCase(service: CreateLeadService): GetCitiesUseCase {
+        return GetCitiesUseCase(service)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetLanguagesUseCase(service: CreateLeadService): GetLanguagesUseCase {
+        return GetLanguagesUseCase(service)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetAdSourcesUseCase(service: CreateLeadService): GetAdSourcesUseCase {
+        return GetAdSourcesUseCase(service)
+    }
+
+
 }

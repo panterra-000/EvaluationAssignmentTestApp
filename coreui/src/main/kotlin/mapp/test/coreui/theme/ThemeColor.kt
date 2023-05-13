@@ -37,7 +37,8 @@ object ThemeColor {
         unFocusedLabelColor = Color(0xFFA0A1B5),
         trailingIcon = Color(0xFFC8C9D9),
         textFieldFont = Color(0xFFC8C9D9),
-
+        dialogOverFlowBackground = Color(0x2200022F),
+        dialogBodyBackground = Color(0xFFFFFFFF)
         )
 
     private val themeDark = themeLight
