@@ -19,3 +19,15 @@ fun PrimaryIcon(
         tint = iconTint
     )
 }
+
+
+
+@Composable
+fun SimpleIcon(
+    @DrawableRes resId: Int,
+) {
+    Icon(
+        painter = painterResource(id = resId),
+        contentDescription = null,
+    )
+}

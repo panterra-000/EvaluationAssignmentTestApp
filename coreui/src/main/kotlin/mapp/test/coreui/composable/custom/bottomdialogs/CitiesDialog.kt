@@ -4,41 +4,35 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.items
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import mapp.test.core.data.LanguageModel
+import mapp.test.core.data.CityModel
 import mapp.test.core.util.AppNetworkResponse
-import mapp.test.core.util.extensions.checkAvailability
 import mapp.test.coreui.R
-import mapp.test.coreui.composable.DividerMin
 import mapp.test.coreui.composable.FillAvailableSpacer
-import mapp.test.coreui.composable.Spacer10dp
 import mapp.test.coreui.composable.Spacer18dp
 import mapp.test.coreui.composable.buttons.PrimaryIconButton
 import mapp.test.coreui.composable.column.PrimaryLazyColumnMaxWith
 import mapp.test.coreui.composable.custom.ErrorView
-import mapp.test.coreui.composable.icons.SimpleIcon
 import mapp.test.coreui.composable.row.PrimaryRowMaxWithVerticalAlignCenter
-import mapp.test.coreui.composable.text.PrimarySubTitleText13sp
-import mapp.test.coreui.composable.text.PrimaryTitleText17sp
 import mapp.test.coreui.composable.text.PrimaryTitleText18sp
 import mapp.test.coreui.composable.text.Text18spInactive
 import mapp.test.coreui.theme.TestAppTheme
 
 @Composable
-fun LanguagesDialog(
+fun CitiesDialog(
     showState: Boolean = false,
-    languagesData: AppNetworkResponse<List<LanguageModel>>,
-    selectedLanguages: List<LanguageModel>,
-    itemCLick: (LanguageModel) -> Unit,
+    citiesState: AppNetworkResponse<List<CityModel>>,
+    itemCLick: (CityModel) -> Unit,
     closeClick: () -> Unit
 ) {
     if (showState) {
@@ -53,6 +47,7 @@ fun LanguagesDialog(
                 }
         ) {
             Spacer(modifier = Modifier.weight(0.2f))
+
             Column(
                 Modifier
                     .weight(0.8f)
@@ -61,16 +56,16 @@ fun LanguagesDialog(
                     .padding(18.dp)
             ) {
                 PrimaryRowMaxWithVerticalAlignCenter {
-                    PrimaryTitleText18sp(text = "Select Language")
+                    PrimaryTitleText18sp(text = "Select country")
                     FillAvailableSpacer()
                     PrimaryIconButton(resId = R.drawable.ic_down) {
                         closeClick()
                     }
                 }
                 Spacer18dp()
-                when (languagesData) {
+                when (citiesState) {
                     is AppNetworkResponse.Error -> {
-                        ErrorView(message = languagesData.message)
+                        ErrorView(message = citiesState.message)
                     }
 
                     AppNetworkResponse.Loading -> {
@@ -79,12 +74,9 @@ fun LanguagesDialog(
 
                     is AppNetworkResponse.Success -> {
                         PrimaryLazyColumnMaxWith(content = {
-                            items(languagesData.data) { language ->
-                                LanguageItemView(
-                                    language = language,
-                                    isSelected = language.checkAvailability(selectedLanguages)
-                                ) {
-                                    itemCLick(language)
+                            items(citiesState.data) { city ->
+                                CityItemView(city = city) {
+                                    itemCLick(city)
                                 }
                             }
                         })
@@ -96,30 +88,20 @@ fun LanguagesDialog(
 }
 
 @Composable
-private fun LanguageItemView(
-    language: LanguageModel,
-    isSelected: Boolean,
+private fun CityItemView(
+    city: CityModel,
     onclick: () -> Unit
 ) {
-    Column(
-        Modifier
+    Row(
+        modifier = Modifier
             .fillMaxWidth()
             .clickable { onclick() }
-            .padding(horizontal = 16.dp)) {
-        Spacer10dp()
-        PrimaryRowMaxWithVerticalAlignCenter {
-            Column {
-                PrimaryTitleText17sp(text = language.title)
-                Spacer(modifier = Modifier.width(8.dp))
-                PrimarySubTitleText13sp(text = language.shortCode)
-            }
-            FillAvailableSpacer()
-            if (isSelected) {
-                SimpleIcon(resId = R.drawable.ic_selected)
-            }
-        }
-        Spacer10dp()
-        DividerMin()
+            .padding(bottom = 8.dp),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        PrimaryTitleText18sp(
+            text = city.title,
+        )
     }
 }
 

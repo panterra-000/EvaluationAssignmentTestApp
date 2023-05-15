@@ -17,6 +17,7 @@ import mapp.test.core.domain.createlead.GetCountriesUseCase
 import mapp.test.core.domain.createlead.GetIntentionTypesUseCase
 import mapp.test.core.domain.createlead.GetLanguagesUseCase
 import mapp.test.core.util.AppNetworkResponse
+import mapp.test.core.util.extensions.addNewItem
 import mapp.test.core.util.myLogD
 import javax.inject.Inject
 
@@ -34,10 +35,10 @@ class CreateLeadViewModel @Inject constructor(
     val intentionTypeState = mutableStateOf("Type")
     val countryState = mutableStateOf("Country")
     val cityState = mutableStateOf("City")
-    val languageState = mutableStateOf("Language")
+    val languageState = mutableStateOf("Languages")
     val phoneState = mutableStateOf("Number")
     val emailState = mutableStateOf("Email")
-    val sourceState = mutableStateOf("Select Source")
+    val adSourceState = mutableStateOf("Select Source")
 
 
     private val _intentionTypesState =
@@ -65,6 +66,20 @@ class CreateLeadViewModel @Inject constructor(
     val adSourcesState: State<AppNetworkResponse<List<AdSourceModel>>>
         get() = _adSourcesState
 
+    private val _selectedIntentionTypeState = mutableStateOf<IntentionTypeModel?>(null)
+    val selectedIntentionTypeState: State<IntentionTypeModel?> get() = _selectedIntentionTypeState
+
+    private val _selectedCountryState = mutableStateOf<CountryModel?>(null)
+    val selectedCountryState: State<CountryModel?> get() = _selectedCountryState
+
+    private val _selectedCityState = mutableStateOf<CityModel?>(null)
+    val selectedCityState: State<CityModel?> get() = _selectedCityState
+
+    private val _selectedLanguagesState = mutableStateOf<List<LanguageModel>>(listOf())
+    val selectedLanguagesState: State<List<LanguageModel>> get() = _selectedLanguagesState
+
+    private val _selectedAdSourceState = mutableStateOf<AdSourceModel?>(null)
+    val selectedAdSourceState: State<AdSourceModel?> get() = _selectedAdSourceState
 
     fun getIntentionTypes() {
         _intentionTypesState.value = AppNetworkResponse.Loading
@@ -84,12 +99,17 @@ class CreateLeadViewModel @Inject constructor(
         }
     }
 
-    fun getCities(id: Int) {
-        _citiesState.value = AppNetworkResponse.Loading
-        viewModelScope.launch {
-            val resp = citiesUseCase.execute(id)
-            _citiesState.value = resp
-            myLogD(msg = "Cities : $resp")
+    fun getCities() {
+        val id = selectedCountryState.value?.id
+        if (id != null) {
+            _citiesState.value = AppNetworkResponse.Loading
+            viewModelScope.launch {
+                val resp = citiesUseCase.execute(id)
+                _citiesState.value = resp
+                myLogD(msg = "Cities : $resp")
+            }
+        } else {
+            _citiesState.value = AppNetworkResponse.Error(message = "Country not selected!")
         }
     }
 
@@ -109,6 +129,31 @@ class CreateLeadViewModel @Inject constructor(
             _adSourcesState.value = resp
             myLogD(msg = "AdSources : $resp")
         }
+    }
+
+
+    fun selectIntentionType(intentionTypeModel: IntentionTypeModel) {
+        _selectedIntentionTypeState.value = intentionTypeModel
+        intentionTypeState.value = intentionTypeModel.title
+    }
+
+    fun selectCountry(countryModel: CountryModel) {
+        _selectedCountryState.value = countryModel
+        countryState.value = countryModel.emoji + " " + countryModel.name
+    }
+
+    fun selectCity(cityModel: CityModel) {
+        _selectedCityState.value = cityModel
+        cityState.value = cityModel.title
+    }
+
+    fun selectLanguage(languageModel: LanguageModel) {
+        _selectedLanguagesState.addNewItem(languageModel)
+    }
+
+    fun selectAdSource(adSourceModel: AdSourceModel) {
+        _selectedAdSourceState.value = adSourceModel
+        adSourceState.value = adSourceModel.title
     }
 
 }
