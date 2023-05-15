@@ -14,3 +14,11 @@ data class LeadModel(
     val adSource: AdSourceModel? = null,
     val channelSource: ChannelSourceModel? = null,
 )
+
+
+data class LeadsResponse(
+    val hasMore: Boolean = false,
+    val cursor: String? = null,
+    val data: List<LeadModel>,
+    val totalCount: Int
+)

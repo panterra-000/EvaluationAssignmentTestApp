@@ -5,12 +5,18 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import mapp.test.core.data.AdSourceModel
 import mapp.test.core.data.CityModel
 import mapp.test.core.data.CountryModel
+import mapp.test.core.data.CreateLeadResponseModel
 import mapp.test.core.data.IntentionTypeModel
 import mapp.test.core.data.LanguageModel
+import mapp.test.core.data.getIds
+import mapp.test.core.data.request.CreateLeadInputModel
+import mapp.test.core.domain.createlead.CreateLeadUseCase
 import mapp.test.core.domain.createlead.GetAdSourcesUseCase
 import mapp.test.core.domain.createlead.GetCitiesUseCase
 import mapp.test.core.domain.createlead.GetCountriesUseCase
@@ -28,6 +34,7 @@ class CreateLeadViewModel @Inject constructor(
     private val citiesUseCase: GetCitiesUseCase,
     private val languagesUseCase: GetLanguagesUseCase,
     private val adSourcesUseCase: GetAdSourcesUseCase,
+    private val createLeadUseCase: CreateLeadUseCase
 ) : ViewModel() {
 
     val firstNameState = mutableStateOf("")
@@ -40,6 +47,9 @@ class CreateLeadViewModel @Inject constructor(
     val emailState = mutableStateOf("")
     val adSourceState = mutableStateOf("Select Source")
 
+    private val _createLeadResponseState =
+        Channel<AppNetworkResponse<CreateLeadResponseModel>>()
+    val createLeadResponseState = _createLeadResponseState.receiveAsFlow()
 
     private val _intentionTypesState =
         mutableStateOf<AppNetworkResponse<List<IntentionTypeModel>>>(AppNetworkResponse.Loading)
@@ -140,6 +150,8 @@ class CreateLeadViewModel @Inject constructor(
     fun selectCountry(countryModel: CountryModel) {
         _selectedCountryState.value = countryModel
         phoneState.value = "+${countryModel.phoneCode}"
+        _selectedCityState.value = null
+        cityState.value = "City"
         countryState.value = countryModel.emoji + " " + countryModel.name
     }
 
@@ -156,6 +168,42 @@ class CreateLeadViewModel @Inject constructor(
     fun selectAdSource(adSourceModel: AdSourceModel) {
         _selectedAdSourceState.value = adSourceModel
         adSourceState.value = adSourceModel.title
+    }
+
+    fun createLead() {
+        viewModelScope.launch {
+            if (checkFields()) {
+                _createLeadResponseState.send(AppNetworkResponse.Loading)
+                val createLeadInputModel = CreateLeadInputModel(
+                    firstName = firstNameState.value,
+                    lastName = lastNameState.value,
+                    intentionId = selectedIntentionTypeState.value?.id!!,
+                    languages = selectedLanguagesState.value.getIds(),
+                    countryId = selectedCountryState.value?.id!!,
+                    cityId = selectedCountryState.value?.id!!,
+                    adSourceId = selectedAdSourceState.value?.id!!,
+                    phone = phoneState.value,
+                    email = emailState.value,
+                )
+                val response = createLeadUseCase.execute(createLeadInputModel)
+                _createLeadResponseState.send(response)
+            } else {
+                _createLeadResponseState.send(AppNetworkResponse.Error(message = "Fields are not completely filled!"))
+            }
+        }
+    }
+
+    private fun checkFields(): Boolean {
+        return (firstNameState.value.isNotEmpty()
+                && lastNameState.value.isNotEmpty()
+                && selectedIntentionTypeState.value != null
+                && selectedLanguagesState.value.isNotEmpty()
+                && selectedCountryState.value != null
+                && selectedCityState.value != null
+                && phoneState.value.isNotEmpty()
+                && emailState.value.isNotEmpty()
+                && selectedAdSourceState.value != null
+                )
     }
 
 }

@@ -10,6 +10,14 @@ fun <T> MutableState<List<T>>.addNewItem(item: T) {
     this.value = list
 }
 
+
+fun <T> MutableState<List<T>>.addNewItems(items: List<T>) {
+    val list = ArrayList<T>()
+    list.addAll(this.value)
+    list.addAll(items)
+    this.value = list
+}
+
 fun <T> MutableState<List<T>>.addOrRemoveItem(item: T) {
     val list = ArrayList<T>()
     list.addAll(this.value)
@@ -28,7 +36,7 @@ fun <T> T.checkAvailability(list: List<T>): Boolean {
     return isAvailable
 }
 
-fun LanguageModel.checkAvailability(list:List<LanguageModel>):Boolean{
+fun LanguageModel.checkAvailability(list: List<LanguageModel>): Boolean {
     var isAvailable = false
     list.forEach {
         if (this.id == it.id) {

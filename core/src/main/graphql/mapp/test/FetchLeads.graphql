@@ -1,5 +1,5 @@
-query FetchLeads{
-    fetchLeads{
+query FetchLeads($paginationInput:PaginationInput!){
+    fetchLeads(pagination: $paginationInput){
         cursor
         data {
             displayName

@@ -5,6 +5,7 @@ import mapp.test.core.data.AdSourceModel
 import mapp.test.core.data.ChannelSourceModel
 import mapp.test.core.data.IntentionTypeModel
 import mapp.test.core.data.LeadModel
+import mapp.test.core.data.LeadsResponse
 import mapp.test.core.data.StatusModel
 import mapp.test.core.util.changeDateFormat
 
@@ -25,11 +26,21 @@ fun FetchLeadsQuery.Data1.toLeadViewData(): LeadModel {
     )
 }
 
-fun FetchLeadsQuery.FetchLeads.mapToLeadsModelList(): List<LeadModel> {
-    return this.data.map {
+fun FetchLeadsQuery.FetchLeads.toLeadsResponse(): LeadsResponse {
+    return LeadsResponse(
+        data = this.data.mapToLeadsModelList(),
+        hasMore = this.hasMore,
+        cursor = this.cursor,
+        totalCount = this.totalCount
+    )
+}
+
+fun List<FetchLeadsQuery.Data1>.mapToLeadsModelList(): List<LeadModel> {
+    return this.map {
         it.toLeadViewData()
     }
 }
+
 
 fun FetchLeadsQuery.Intention.toModel(): IntentionTypeModel? {
     return if (this.id != null && this.title != null) {

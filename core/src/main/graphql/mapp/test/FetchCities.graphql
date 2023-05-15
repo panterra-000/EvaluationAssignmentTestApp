@@ -2,5 +2,7 @@ query FetchCities($countryId:Int!){
     cities(countryId: $countryId){
         id
         title
+        offsetMs
+        offset
     }
 }

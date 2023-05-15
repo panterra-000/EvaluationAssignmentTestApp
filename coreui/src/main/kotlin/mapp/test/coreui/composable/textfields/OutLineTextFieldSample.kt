@@ -30,6 +30,7 @@ fun TextFieldFillMaxWidth(labelText: String = "", textState: MutableState<String
             unfocusedLabelColor = TestAppTheme.colors.unFocusedLabelColor,
             focusedLabelColor = TestAppTheme.colors.focusedLabelColor,
         ),
+        maxLines = 1,
         textStyle = TextStyle(fontSize = 16.sp, color = TestAppTheme.colors.textFieldFont),
         value = textState.value,
         label = { Text(text = labelText) },
@@ -55,11 +56,37 @@ fun PhoneTextFieldFillMaxWidth(labelText: String = "", textState: MutableState<S
         ),
         textStyle = TextStyle(fontSize = 16.sp, color = TestAppTheme.colors.textFieldFont),
         value = textState.value,
+        maxLines = 1,
         label = { Text(text = labelText) },
         onValueChange = {
             textState.value = it
         },
         keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Number),
+        modifier = Modifier
+            .padding(top = 12.dp)
+            .fillMaxWidth()
+    )
+}
+
+
+@Composable
+fun EmailTextFieldFillMaxWidth(labelText: String = "", textState: MutableState<String>) {
+    OutlinedTextField(
+        shape = RoundedCornerShape(12.dp),
+        colors = TextFieldDefaults.outlinedTextFieldColors(
+            unfocusedBorderColor = TestAppTheme.colors.unFocusedBorderColor,
+            focusedBorderColor = TestAppTheme.colors.focusedBorderColor,
+            unfocusedLabelColor = TestAppTheme.colors.unFocusedLabelColor,
+            focusedLabelColor = TestAppTheme.colors.focusedLabelColor,
+        ),
+        textStyle = TextStyle(fontSize = 16.sp, color = TestAppTheme.colors.textFieldFont),
+        value = textState.value,
+        label = { Text(text = labelText) },
+        onValueChange = {
+            textState.value = it
+        },
+        maxLines = 1,
+        keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
         modifier = Modifier
             .padding(top = 12.dp)
             .fillMaxWidth()

@@ -1,17 +1,22 @@
 package mapp.test.presentation.screens
 
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.res.stringResource
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import mapp.test.core.util.AppNetworkResponse
+import mapp.test.core.util.showShortToast
 import mapp.test.coreui.composable.Spacer18dp
 import mapp.test.coreui.composable.Spacer20dp
 import mapp.test.coreui.composable.box.PrimaryBoxMaxSize
 import mapp.test.coreui.composable.buttons.PrimaryButtonInRow
 import mapp.test.coreui.composable.buttons.SecondaryButtonInRow
+import mapp.test.coreui.composable.custom.PrimaryLoadingView
 import mapp.test.coreui.composable.custom.PrimaryScrollableColumnBodyWithAppBar
 import mapp.test.coreui.composable.custom.bottomdialogs.AdSourcesDialog
 import mapp.test.coreui.composable.custom.bottomdialogs.CitiesDialog
@@ -20,10 +25,10 @@ import mapp.test.coreui.composable.custom.bottomdialogs.IntentionTypesDialog
 import mapp.test.coreui.composable.custom.bottomdialogs.LanguagesDialog
 import mapp.test.coreui.composable.row.PrimaryRowMaxWith
 import mapp.test.coreui.composable.row.PrimaryRowMaxWithInBox
+import mapp.test.coreui.composable.textfields.EmailTextFieldFillMaxWidth
 import mapp.test.coreui.composable.textfields.OutLineTextFieldInRow
 import mapp.test.coreui.composable.textfields.PhoneTextFieldFillMaxWidth
 import mapp.test.coreui.composable.textfields.TextFieldDisabledClickable
-import mapp.test.coreui.composable.textfields.TextFieldFillMaxWidth
 import mapp.test.coreui.composable.textfields.TextFieldInRowDisabledClickableInRow
 import mapp.test.presentation.viewmodels.CreateLeadViewModel
 
@@ -32,7 +37,12 @@ fun CreateLeadScreen(
     navController: NavHostController, viewModel: CreateLeadViewModel = hiltViewModel()
 ) {
 
+    val context = LocalContext.current
     val focusManager = LocalFocusManager.current
+
+    val createLeadLoadingState = remember {
+        mutableStateOf(false)
+    }
 
     val countriesDialogShowState = remember {
         mutableStateOf(false)
@@ -49,6 +59,27 @@ fun CreateLeadScreen(
     val adSourcesDialogShowState = remember {
         mutableStateOf(false)
     }
+
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.createLeadResponseState.collect { response ->
+            when (response) {
+                is AppNetworkResponse.Error -> {
+                    createLeadLoadingState.value = false
+                    showShortToast(context, response.message)
+                }
+
+                AppNetworkResponse.Loading -> {
+                    createLeadLoadingState.value = true
+                }
+
+                is AppNetworkResponse.Success -> {
+                    navController.navigateUp()
+                    showShortToast(context, "Lead created!")
+                    createLeadLoadingState.value = false
+                }
+            }
+        }
+    })
 
     PrimaryBoxMaxSize {
         PrimaryScrollableColumnBodyWithAppBar(
@@ -107,7 +138,7 @@ fun CreateLeadScreen(
             }
 
             PhoneTextFieldFillMaxWidth(labelText = "Number", textState = viewModel.phoneState)
-            TextFieldFillMaxWidth(labelText = "Email", textState = viewModel.emailState)
+            EmailTextFieldFillMaxWidth(labelText = "Email", textState = viewModel.emailState)
 
             TextFieldDisabledClickable(
                 labelText = "Source",
@@ -126,9 +157,11 @@ fun CreateLeadScreen(
             }
             Spacer18dp()
             PrimaryButtonInRow("Save") {
-
+                viewModel.createLead()
             }
         }
+
+        PrimaryLoadingView(state = createLeadLoadingState.value)
     }
 
     IntentionTypesDialog(showState = intentionTypesDialogShowState.value,

@@ -7,6 +7,7 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import mapp.test.core.domain.GetLeadsUseCase
+import mapp.test.core.domain.createlead.CreateLeadUseCase
 import mapp.test.core.domain.createlead.GetAdSourcesUseCase
 import mapp.test.core.domain.createlead.GetCitiesUseCase
 import mapp.test.core.domain.createlead.GetCountriesUseCase
@@ -97,6 +98,12 @@ object AppModule {
     @Singleton
     fun provideGetAdSourcesUseCase(service: CreateLeadService): GetAdSourcesUseCase {
         return GetAdSourcesUseCase(service)
+    }
+
+    @Provides
+    @Singleton
+    fun provideCreateLeadUseCase(service: CreateLeadService): CreateLeadUseCase {
+        return CreateLeadUseCase(service)
     }
 
 

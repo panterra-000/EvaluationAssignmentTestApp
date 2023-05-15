@@ -5,7 +5,7 @@ import mapp.test.core.data.CityModel
 
 fun FetchCitiesQuery.City.toCityModel(): CityModel {
     return CityModel(
-        title = this.title, id = this.id
+        title = this.title, id = this.id, offset = this.offset
     )
 }
 

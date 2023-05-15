@@ -5,3 +5,12 @@ data class LanguageModel(
     val shortCode: String,
     val title: String
 )
+
+
+fun List<LanguageModel>.getIds(): List<Int> {
+    val list = ArrayList<Int>()
+    this.forEach {
+        list.add(it.id)
+    }
+    return list
+}
