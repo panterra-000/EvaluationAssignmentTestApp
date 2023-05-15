@@ -36,7 +36,8 @@ object ThemeColor {
         focusedLabelColor = Color(0xFFA0A1B5),
         unFocusedLabelColor = Color(0xFFA0A1B5),
         trailingIcon = Color(0xFFC8C9D9),
-        textFieldFont = Color(0xFFC8C9D9),
+        textFieldFont = Color(0xFF00022F),
+        inactiveFieldFont = Color(0xFFA0A1B5),
         dialogOverFlowBackground = Color(0x4400022F),
         dialogBodyBackground = Color(0xFFFFFFFF),
         selectedIconTint = Color(0xFF037EE5)

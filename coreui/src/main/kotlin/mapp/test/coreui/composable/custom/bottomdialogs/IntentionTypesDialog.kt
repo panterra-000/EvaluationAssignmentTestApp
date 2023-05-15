@@ -33,6 +33,7 @@ import mapp.test.coreui.theme.TestAppTheme
 @Composable
 fun IntentionTypesDialog(
     showState: Boolean = false,
+    selectedIntentionType: IntentionTypeModel?,
     intentionTypesData: AppNetworkResponse<List<IntentionTypeModel>>,
     itemCLick: (IntentionTypeModel) -> Unit,
     closeClick: () -> Unit
@@ -77,7 +78,10 @@ fun IntentionTypesDialog(
                     is AppNetworkResponse.Success -> {
                         PrimaryLazyVerticalGrid(content = {
                             items(intentionTypesData.data) { type ->
-                                IntentionTypeView(type = type) {
+                                IntentionTypeView(
+                                    type = type,
+                                    isSelected = type.id == selectedIntentionType?.id
+                                ) {
                                     itemCLick(type)
                                 }
                             }
@@ -91,7 +95,7 @@ fun IntentionTypesDialog(
 
 @Composable
 private fun IntentionTypeView(
-    type: IntentionTypeModel,
+    type: IntentionTypeModel, isSelected: Boolean,
     onclick: () -> Unit
 ) {
     Row(
@@ -101,7 +105,14 @@ private fun IntentionTypeView(
             .padding(bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        PrimaryIcon(resId = R.drawable.ic_radio)
+        if (isSelected) {
+            PrimaryIcon(
+                resId = R.drawable.ic_selected_radio,
+                iconTint = TestAppTheme.colors.selectedIconTint
+            )
+        } else {
+            PrimaryIcon(resId = R.drawable.ic_radio)
+        }
         Spacer8dp()
         Text18spInactive(text = type.title)
     }

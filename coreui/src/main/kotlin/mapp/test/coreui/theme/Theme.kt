@@ -38,6 +38,7 @@ data class TestAppColors(
     val dialogOverFlowBackground: Color,
     val dialogBodyBackground: Color,
     val selectedIconTint: Color,
+    val inactiveFieldFont: Color,
 )
 
 @Composable

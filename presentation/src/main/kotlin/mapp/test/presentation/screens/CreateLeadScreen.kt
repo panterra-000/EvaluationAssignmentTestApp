@@ -21,6 +21,7 @@ import mapp.test.coreui.composable.custom.bottomdialogs.LanguagesDialog
 import mapp.test.coreui.composable.row.PrimaryRowMaxWith
 import mapp.test.coreui.composable.row.PrimaryRowMaxWithInBox
 import mapp.test.coreui.composable.textfields.OutLineTextFieldInRow
+import mapp.test.coreui.composable.textfields.PhoneTextFieldFillMaxWidth
 import mapp.test.coreui.composable.textfields.TextFieldDisabledClickable
 import mapp.test.coreui.composable.textfields.TextFieldFillMaxWidth
 import mapp.test.coreui.composable.textfields.TextFieldInRowDisabledClickableInRow
@@ -66,6 +67,7 @@ fun CreateLeadScreen(
 
             TextFieldDisabledClickable(labelText = "Lead Intention type",
                 textState = viewModel.intentionTypeState,
+                isActive = viewModel.selectedIntentionTypeState.value != null,
                 onclick = {
                     focusManager.clearFocus()
                     intentionTypesDialogShowState.value = true
@@ -74,6 +76,7 @@ fun CreateLeadScreen(
 
             TextFieldDisabledClickable(
                 labelText = "Country",
+                isActive = viewModel.selectedCountryState.value != null,
                 textState = viewModel.countryState,
                 onclick = {
                     focusManager.clearFocus()
@@ -84,6 +87,7 @@ fun CreateLeadScreen(
             PrimaryRowMaxWith {
                 TextFieldInRowDisabledClickableInRow(
                     labelText = "City",
+                    isActive = viewModel.selectedCityState.value != null,
                     textState = viewModel.cityState,
                     onclick = {
                         focusManager.clearFocus()
@@ -92,7 +96,8 @@ fun CreateLeadScreen(
                     })
                 Spacer20dp()
                 TextFieldInRowDisabledClickableInRow(
-                    labelText = "Language",
+                    labelText = "Languages",
+                    isActive = viewModel.selectedLanguagesState.value.isNotEmpty(),
                     textState = viewModel.languageState,
                     onclick = {
                         focusManager.clearFocus()
@@ -101,11 +106,12 @@ fun CreateLeadScreen(
                     })
             }
 
-            TextFieldFillMaxWidth(labelText = "Number", textState = viewModel.phoneState)
+            PhoneTextFieldFillMaxWidth(labelText = "Number", textState = viewModel.phoneState)
             TextFieldFillMaxWidth(labelText = "Email", textState = viewModel.emailState)
 
             TextFieldDisabledClickable(
                 labelText = "Source",
+                isActive = viewModel.selectedAdSourceState.value != null,
                 textState = viewModel.adSourceState,
                 onclick = {
                     focusManager.clearFocus()
@@ -127,6 +133,7 @@ fun CreateLeadScreen(
 
     IntentionTypesDialog(showState = intentionTypesDialogShowState.value,
         intentionTypesData = viewModel.intentionTypesState.value,
+        selectedIntentionType = viewModel.selectedIntentionTypeState.value,
         itemCLick = {
             viewModel.selectIntentionType(it); intentionTypesDialogShowState.value = false
         },

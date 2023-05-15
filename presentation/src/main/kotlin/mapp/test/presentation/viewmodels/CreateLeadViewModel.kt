@@ -36,8 +36,8 @@ class CreateLeadViewModel @Inject constructor(
     val countryState = mutableStateOf("Country")
     val cityState = mutableStateOf("City")
     val languageState = mutableStateOf("Languages")
-    val phoneState = mutableStateOf("Number")
-    val emailState = mutableStateOf("Email")
+    val phoneState = mutableStateOf("")
+    val emailState = mutableStateOf("")
     val adSourceState = mutableStateOf("Select Source")
 
 
@@ -139,6 +139,7 @@ class CreateLeadViewModel @Inject constructor(
 
     fun selectCountry(countryModel: CountryModel) {
         _selectedCountryState.value = countryModel
+        phoneState.value = "+${countryModel.phoneCode}"
         countryState.value = countryModel.emoji + " " + countryModel.name
     }
 
