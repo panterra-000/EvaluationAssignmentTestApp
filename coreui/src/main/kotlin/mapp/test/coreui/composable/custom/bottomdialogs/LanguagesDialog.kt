@@ -25,7 +25,7 @@ import mapp.test.coreui.composable.Spacer18dp
 import mapp.test.coreui.composable.buttons.PrimaryIconButton
 import mapp.test.coreui.composable.column.PrimaryLazyColumnMaxWith
 import mapp.test.coreui.composable.custom.ErrorView
-import mapp.test.coreui.composable.icons.SimpleIcon
+import mapp.test.coreui.composable.icons.PrimaryIcon
 import mapp.test.coreui.composable.row.PrimaryRowMaxWithVerticalAlignCenter
 import mapp.test.coreui.composable.text.PrimarySubTitleText13sp
 import mapp.test.coreui.composable.text.PrimaryTitleText17sp
@@ -115,7 +115,10 @@ private fun LanguageItemView(
             }
             FillAvailableSpacer()
             if (isSelected) {
-                SimpleIcon(resId = R.drawable.ic_selected)
+                PrimaryIcon(
+                    resId = R.drawable.ic_selected,
+                    iconTint = TestAppTheme.colors.selectedIconTint
+                )
             }
         }
         Spacer10dp()

@@ -38,7 +38,8 @@ object ThemeColor {
         trailingIcon = Color(0xFFC8C9D9),
         textFieldFont = Color(0xFFC8C9D9),
         dialogOverFlowBackground = Color(0x4400022F),
-        dialogBodyBackground = Color(0xFFFFFFFF)
+        dialogBodyBackground = Color(0xFFFFFFFF),
+        selectedIconTint = Color(0xFF037EE5)
         )
 
     private val themeDark = themeLight

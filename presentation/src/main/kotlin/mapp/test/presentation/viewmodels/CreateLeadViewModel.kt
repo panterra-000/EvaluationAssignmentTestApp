@@ -17,7 +17,7 @@ import mapp.test.core.domain.createlead.GetCountriesUseCase
 import mapp.test.core.domain.createlead.GetIntentionTypesUseCase
 import mapp.test.core.domain.createlead.GetLanguagesUseCase
 import mapp.test.core.util.AppNetworkResponse
-import mapp.test.core.util.extensions.addNewItem
+import mapp.test.core.util.extensions.addOrRemoveItem
 import mapp.test.core.util.myLogD
 import javax.inject.Inject
 
@@ -148,7 +148,8 @@ class CreateLeadViewModel @Inject constructor(
     }
 
     fun selectLanguage(languageModel: LanguageModel) {
-        _selectedLanguagesState.addNewItem(languageModel)
+        _selectedLanguagesState.addOrRemoveItem(languageModel)
+        myLogD("Selected Items: ${selectedLanguagesState.value}")
     }
 
     fun selectAdSource(adSourceModel: AdSourceModel) {

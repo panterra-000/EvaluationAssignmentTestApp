@@ -7,6 +7,7 @@ fun <T> MutableState<List<T>>.addNewItem(item: T) {
     val list = ArrayList<T>()
     list.addAll(this.value)
     if (!item.checkAvailability(list)) list.add(item)
+    this.value = list
 }
 
 fun <T> MutableState<List<T>>.addOrRemoveItem(item: T) {
@@ -14,6 +15,7 @@ fun <T> MutableState<List<T>>.addOrRemoveItem(item: T) {
     list.addAll(this.value)
     if (item.checkAvailability(list)) list.remove(item)
     else list.add(item)
+    this.value = list
 }
 
 fun <T> T.checkAvailability(list: List<T>): Boolean {
