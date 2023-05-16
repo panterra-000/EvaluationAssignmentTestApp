@@ -39,6 +39,11 @@ data class TestAppColors(
     val dialogBodyBackground: Color,
     val selectedIconTint: Color,
     val inactiveFieldFont: Color,
+    val primaryBorderColor: Color,
+    val selectedRadioTint: Color,
+    val subTitleText: Color,
+    val activeStatusItemTint: Color,
+    val inActiveactiveStatusItemTint: Color,
 )
 
 @Composable

@@ -86,6 +86,20 @@ fun PrimaryTitleText18sp(
 
 
 @Composable
+fun PrimaryActiveText14sp(
+    text: String,
+    color: Color = TestAppTheme.colors.primaryTitleText
+) {
+    Text(
+        text = text,
+        fontSize = 14.sp,
+        fontWeight = FontWeight(500),
+        color = color,
+    )
+}
+
+
+@Composable
 fun PrimaryTitleText17sp(
     text: String,
 ) {
@@ -107,10 +121,23 @@ fun PrimarySubTitleText13sp(
         text = text,
         fontSize = 13.sp,
         fontWeight = FontWeight(400),
-        color = Color.Black,
+        color = color,
     )
 }
 
+
+@Composable
+fun PrimarySubTitleBoldText13sp(
+    text: String,
+    color: Color = TestAppTheme.colors.subTitleText
+) {
+    Text(
+        text = text,
+        fontSize = 14.sp,
+        fontWeight = FontWeight(500),
+        color = color,
+    )
+}
 
 
 

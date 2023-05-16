@@ -33,6 +33,7 @@ object ThemeColor {
         avatarBottomGradient = Color(0xFF27B1FF),
         unFocusedBorderColor = Color(0xFFEDEDF3),
         focusedBorderColor = Color(0xFFEDEDF3),
+        primaryBorderColor = Color(0xFFF5F5F8),
         focusedLabelColor = Color(0xFFA0A1B5),
         unFocusedLabelColor = Color(0xFFA0A1B5),
         trailingIcon = Color(0xFFC8C9D9),
@@ -40,7 +41,11 @@ object ThemeColor {
         inactiveFieldFont = Color(0xFFA0A1B5),
         dialogOverFlowBackground = Color(0x4400022F),
         dialogBodyBackground = Color(0xFFFFFFFF),
-        selectedIconTint = Color(0xFF037EE5)
+        selectedIconTint = Color(0xFF037EE5),
+        selectedRadioTint = Color(0xFF00A3FF),
+        subTitleText = Color(0xFF818097),
+        activeStatusItemTint = Color(0xFF122AFF),
+        inActiveactiveStatusItemTint = Color(0xFFEDEDF3),
         )
 
     private val themeDark = themeLight

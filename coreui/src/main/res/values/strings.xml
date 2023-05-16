@@ -7,5 +7,6 @@
     <string name="loading_title">Loading…</string>
     <string name="lead_information">Lead information</string>
     <string name="lead_profile_title">Lead profile</string>
+    <string name="status_title">Lead status</string>
 
 </resources>

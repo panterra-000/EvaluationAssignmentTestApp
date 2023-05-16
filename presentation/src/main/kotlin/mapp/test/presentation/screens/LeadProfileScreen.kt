@@ -11,6 +11,7 @@ import mapp.test.coreui.composable.box.PrimaryBoxMaxSize
 import mapp.test.coreui.composable.custom.PrimaryScrollableColumnBodyWithAppBar
 import mapp.test.presentation.viewmodels.LeadProfileViewModel
 import mapp.test.presentation.views.leadprofile.LeadHeaderView
+import mapp.test.presentation.views.leadprofile.LeadStatusView
 
 @Composable
 fun LeadProfileScreen(
@@ -31,11 +32,17 @@ fun LeadProfileScreen(
                 navController.navigateUp()
             }) {
             LeadHeaderView(
-                fullName = viewModel.fullNameState.value,
-                avatarUrl = "",
+                fullName = viewModel.leadProfileState.value?.displayName.toString(),
+                avatarUrl = viewModel.leadProfileState.value?.avatar?.path.toString(),
                 leadId = id,
                 editClick = {})
+            viewModel.leadProfileState.value?.status?.let {
+                LeadStatusView(
+                    status = it,
+                    onClick = {
 
+                    })
+            }
         }
     }
 }

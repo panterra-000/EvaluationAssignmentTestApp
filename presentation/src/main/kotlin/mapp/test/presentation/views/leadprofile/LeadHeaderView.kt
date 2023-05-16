@@ -10,7 +10,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import mapp.test.coreui.composable.DividerMin
 import mapp.test.coreui.composable.Spacer10dp
 import mapp.test.coreui.composable.Spacer13dp
 import mapp.test.coreui.composable.Spacer6dp
@@ -27,7 +26,7 @@ fun LeadHeaderView(
         Modifier.fillMaxWidth()
     ) {
         Spacer10dp()
-        Column(Modifier.padding(start = 18.dp)) {
+        Column(Modifier.padding(start = 10.dp, end = 10.dp)) {
             Row(
                 modifier = Modifier.fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
             ) {
@@ -46,7 +45,5 @@ fun LeadHeaderView(
                 }
             }
         }
-        Spacer10dp()
-        DividerMin()
     }
 }
