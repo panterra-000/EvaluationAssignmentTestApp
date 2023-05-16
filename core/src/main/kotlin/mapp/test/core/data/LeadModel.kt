@@ -1,6 +1,7 @@
 package mapp.test.core.data
 
 data class LeadModel(
+    val id: Int,
     val firstName: String = "",
     val lastName: String = "",
     val fullName: String = "",

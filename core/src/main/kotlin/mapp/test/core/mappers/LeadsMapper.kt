@@ -11,6 +11,7 @@ import mapp.test.core.util.changeDateFormat
 
 fun FetchLeadsQuery.Data1.toLeadViewData(): LeadModel {
     return LeadModel(
+        id = this.id,
         fullName = this.displayName ?: "",
         firstName = this.firstName ?: "",
         lastName = this.lastName ?: "",

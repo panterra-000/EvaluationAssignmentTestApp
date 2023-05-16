@@ -2,6 +2,7 @@ query FetchLeads($paginationInput:PaginationInput!){
     fetchLeads(pagination: $paginationInput){
         cursor
         data {
+            id
             displayName
             firstName
             lastName

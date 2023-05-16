@@ -13,13 +13,13 @@ import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 
 @Composable
-fun LeadProfileScreen(navController: NavHostController) {
+fun LeadProfileScreen(navController: NavHostController, id: Int) {
 
     Column(
         modifier = Modifier.fillMaxSize().background(Color.White),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Text("LeadProfileScreen", color = Color.Green, fontSize = 20.sp)
+        Text("LeadProfileScreen, ID: $id", color = Color.Green, fontSize = 20.sp)
     }
 }

@@ -15,7 +15,7 @@ import mapp.test.coreui.composable.column.PrimaryColumnMaxSize
 import mapp.test.coreui.composable.column.PrimaryLazyColumnMaxWith
 import mapp.test.coreui.composable.swiperefesh.PrimarySwipeRefreshColumn
 import mapp.test.coreui.consts.CREATE_LEAD_SCREEN_ROUTE
-import mapp.test.coreui.consts.LEAD_PROFILE_SCREEN_ROUTE
+import mapp.test.presentation.destinations.buildLeadProfileRoute
 import mapp.test.presentation.viewmodels.LeadsViewModel
 import mapp.test.presentation.views.LeadView
 
@@ -48,7 +48,7 @@ fun LeadsScreen(
                 PrimaryLazyColumnMaxWith {
                     items(viewModel.allLeadsState.value) { lead ->
                         LeadView(lead, onclick = {
-                            navController.navigate(LEAD_PROFILE_SCREEN_ROUTE)
+                            navController.navigate(buildLeadProfileRoute(lead.id))
                         })
                     }
 

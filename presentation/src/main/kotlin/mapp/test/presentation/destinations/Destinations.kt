@@ -21,8 +21,9 @@ fun NavGraphBuilder.leadsDestination(
 fun NavGraphBuilder.leadProfileDestination(
     navController: NavHostController,
 ) {
-    composable(LEAD_PROFILE_SCREEN_ROUTE) {
-        LeadProfileScreen(navController)
+    composable("$LEAD_PROFILE_SCREEN_ROUTE/{id}") {
+        val id = it.arguments?.getString("id")
+        LeadProfileScreen(navController, id!!.toInt())
     }
 }
 
@@ -33,3 +34,6 @@ fun NavGraphBuilder.createLeadDestination(
         CreateLeadScreen(navController)
     }
 }
+
+
+fun buildLeadProfileRoute(id: Int) = "$LEAD_PROFILE_SCREEN_ROUTE/$id"

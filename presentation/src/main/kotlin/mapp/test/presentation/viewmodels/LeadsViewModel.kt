@@ -38,6 +38,7 @@ class LeadsViewModel @Inject constructor(
         if (reload) {
             _leadsResponseState.value = null
             _allLeadsState.value = emptyList()
+            _isRefreshingState.value = true
         }
         viewModelScope.launch {
             when (val resp = getLeadsUseCase.execute(cursor = leadsResponseState.value?.cursor)) {
@@ -52,6 +53,7 @@ class LeadsViewModel @Inject constructor(
                     myLogD(resp.data.toString())
                 }
             }
+            _isRefreshingState.value = false
         }
     }
 
