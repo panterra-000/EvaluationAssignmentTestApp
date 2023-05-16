@@ -13,10 +13,13 @@ import mapp.test.core.domain.createlead.GetCitiesUseCase
 import mapp.test.core.domain.createlead.GetCountriesUseCase
 import mapp.test.core.domain.createlead.GetIntentionTypesUseCase
 import mapp.test.core.domain.createlead.GetLanguagesUseCase
+import mapp.test.core.domain.leadprofile.GetLeadProfileUseCase
 import mapp.test.core.service.LeadsService
 import mapp.test.core.service.LeadsServiceImpl
 import mapp.test.core.service.createlead.CreateLeadService
 import mapp.test.core.service.createlead.CreateLeadServiceImpl
+import mapp.test.core.service.leadprofile.LeadProfileService
+import mapp.test.core.service.leadprofile.LeadProfileServiceImpl
 import mapp.test.evaluationassignmenttestapp.BuildConfig
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
@@ -106,5 +109,16 @@ object AppModule {
         return CreateLeadUseCase(service)
     }
 
+    @Provides
+    @Singleton
+    fun provideLeadProfileService(apolloClient: ApolloClient): LeadProfileService {
+        return LeadProfileServiceImpl(apolloClient)
+    }
+
+    @Provides
+    @Singleton
+    fun provideGetLeadProfileUseCase(service: LeadProfileService): GetLeadProfileUseCase {
+        return GetLeadProfileUseCase(service)
+    }
 
 }

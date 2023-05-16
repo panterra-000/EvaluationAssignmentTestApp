@@ -1,25 +1,42 @@
 package mapp.test.presentation.screens
 
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.unit.sp
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import mapp.test.coreui.R
+import mapp.test.coreui.composable.box.PrimaryBoxMaxSize
+import mapp.test.coreui.composable.custom.PrimaryScrollableColumnBodyWithAppBar
+import mapp.test.presentation.viewmodels.LeadProfileViewModel
+import mapp.test.presentation.views.leadprofile.LeadHeaderView
 
 @Composable
-fun LeadProfileScreen(navController: NavHostController, id: Int) {
+fun LeadProfileScreen(
+    navController: NavHostController,
+    id: Int,
+    viewModel: LeadProfileViewModel = hiltViewModel()
+) {
 
-    Column(
-        modifier = Modifier.fillMaxSize().background(Color.White),
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally
-    ) {
-        Text("LeadProfileScreen, ID: $id", color = Color.Green, fontSize = 20.sp)
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.getLeadProfile(id)
+    })
+
+    PrimaryBoxMaxSize {
+        PrimaryScrollableColumnBodyWithAppBar(
+            title = stringResource(id = R.string.lead_profile_title),
+            padding = 0.dp,
+            backClick = {
+                navController.navigateUp()
+            }) {
+            LeadHeaderView(
+                fullName = viewModel.fullNameState.value,
+                avatarUrl = "",
+                leadId = id,
+                editClick = {})
+
+        }
     }
 }
+

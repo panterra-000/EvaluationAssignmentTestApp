@@ -10,6 +10,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 import mapp.test.coreui.composable.DividerMin
 import mapp.test.coreui.composable.buttons.BackClickableIcon
@@ -18,6 +19,7 @@ import mapp.test.coreui.composable.text.PrimaryTitleText18sp
 @Composable
 fun PrimaryScrollableColumnBodyWithAppBar(
     title: String = "",
+    padding: Dp = 18.dp,
     backClick: () -> Unit,
     content: @Composable ColumnScope.() -> Unit
 ) {
@@ -38,7 +40,7 @@ fun PrimaryScrollableColumnBodyWithAppBar(
         Column(
             Modifier
                 .verticalScroll(rememberScrollState())
-                .padding(18.dp)
+                .padding(padding)
         ) {
             content()
         }
