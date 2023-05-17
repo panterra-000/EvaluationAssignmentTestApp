@@ -60,3 +60,28 @@ fun RowScope.SecondaryButtonInRow(
         }
     }
 }
+
+
+@OptIn(ExperimentalMaterialApi::class)
+@Composable
+fun SecondaryButton(
+    text: String = "", onClick: () -> Unit
+) {
+    Card(
+        border = BorderStroke(1.4.dp, color = TestAppTheme.colors.primaryButtonBackground),
+        shape = RoundedCornerShape(6.dp),
+        onClick = {
+            onClick()
+        },
+        backgroundColor = TestAppTheme.colors.secondaryButtonBackground,
+    ) {
+        Box(
+            contentAlignment = Alignment.Center, modifier = Modifier
+                .padding(vertical = 4.dp, horizontal = 30.dp)
+        ) {
+            PrimaryTitleText16sp(text = text, color = TestAppTheme.colors.secondaryButtonText)
+        }
+    }
+}
+
+

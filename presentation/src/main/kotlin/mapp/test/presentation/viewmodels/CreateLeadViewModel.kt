@@ -96,7 +96,6 @@ class CreateLeadViewModel @Inject constructor(
         viewModelScope.launch {
             val resp = intentionTypesUseCase.execute()
             _intentionTypesState.value = resp
-            myLogD(msg = "Intention types: $resp")
         }
     }
 
@@ -105,7 +104,6 @@ class CreateLeadViewModel @Inject constructor(
         viewModelScope.launch {
             val resp = countriesUseCase.execute()
             _countriesState.value = resp
-            myLogD(msg = "Countries : $resp")
         }
     }
 
@@ -140,7 +138,6 @@ class CreateLeadViewModel @Inject constructor(
             myLogD(msg = "AdSources : $resp")
         }
     }
-
 
     fun selectIntentionType(intentionTypeModel: IntentionTypeModel) {
         _selectedIntentionTypeState.value = intentionTypeModel
@@ -180,11 +177,14 @@ class CreateLeadViewModel @Inject constructor(
                     intentionId = selectedIntentionTypeState.value?.id!!,
                     languages = selectedLanguagesState.value.getIds(),
                     countryId = selectedCountryState.value?.id!!,
-                    cityId = selectedCountryState.value?.id!!,
+                    cityId = selectedCityState.value?.id!!,
                     adSourceId = selectedAdSourceState.value?.id!!,
                     phone = phoneState.value,
                     email = emailState.value,
                 )
+
+                myLogD("::::::: => request => :  $createLeadInputModel")
+
                 val response = createLeadUseCase.execute(createLeadInputModel)
                 _createLeadResponseState.send(response)
             } else {

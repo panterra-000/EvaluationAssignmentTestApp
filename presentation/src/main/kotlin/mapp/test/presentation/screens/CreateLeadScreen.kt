@@ -11,6 +11,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import mapp.test.core.util.AppNetworkResponse
 import mapp.test.core.util.showShortToast
+import mapp.test.coreui.R.string
 import mapp.test.coreui.composable.Spacer18dp
 import mapp.test.coreui.composable.Spacer20dp
 import mapp.test.coreui.composable.box.PrimaryBoxMaxSize
@@ -82,21 +83,24 @@ fun CreateLeadScreen(
     })
 
     PrimaryBoxMaxSize {
-        PrimaryScrollableColumnBodyWithAppBar(
-            title = stringResource(id = mapp.test.coreui.R.string.lead_information),
+        PrimaryScrollableColumnBodyWithAppBar(title = stringResource(id = string.lead_information),
             backClick = {
                 navController.navigateUp()
             }) {
 
             PrimaryRowMaxWith {
                 OutLineTextFieldInRow(
-                    labelText = "First Name", textState = viewModel.firstNameState
+                    labelText = stringResource(id = string.first_name),
+                    textState = viewModel.firstNameState
                 )
                 Spacer18dp()
-                OutLineTextFieldInRow(labelText = "Last name", textState = viewModel.lastNameState)
+                OutLineTextFieldInRow(
+                    labelText = stringResource(id = string.last_name),
+                    textState = viewModel.lastNameState
+                )
             }
 
-            TextFieldDisabledClickable(labelText = "Lead Intention type",
+            TextFieldDisabledClickable(labelText = stringResource(id = string.lead_intention_type),
                 textState = viewModel.intentionTypeState,
                 isActive = viewModel.selectedIntentionTypeState.value != null,
                 onclick = {
@@ -105,8 +109,7 @@ fun CreateLeadScreen(
                     viewModel.getIntentionTypes()
                 })
 
-            TextFieldDisabledClickable(
-                labelText = "Country",
+            TextFieldDisabledClickable(labelText = stringResource(id = string.country),
                 isActive = viewModel.selectedCountryState.value != null,
                 textState = viewModel.countryState,
                 onclick = {
@@ -116,8 +119,7 @@ fun CreateLeadScreen(
                 })
 
             PrimaryRowMaxWith {
-                TextFieldInRowDisabledClickableInRow(
-                    labelText = "City",
+                TextFieldInRowDisabledClickableInRow(labelText = stringResource(id = string.city),
                     isActive = viewModel.selectedCityState.value != null,
                     textState = viewModel.cityState,
                     onclick = {
@@ -126,8 +128,7 @@ fun CreateLeadScreen(
                         viewModel.getCities()
                     })
                 Spacer20dp()
-                TextFieldInRowDisabledClickableInRow(
-                    labelText = "Languages",
+                TextFieldInRowDisabledClickableInRow(labelText = stringResource(id = string.languages),
                     isActive = viewModel.selectedLanguagesState.value.isNotEmpty(),
                     textState = viewModel.languageState,
                     onclick = {
@@ -137,11 +138,16 @@ fun CreateLeadScreen(
                     })
             }
 
-            PhoneTextFieldFillMaxWidth(labelText = "Number", textState = viewModel.phoneState)
-            EmailTextFieldFillMaxWidth(labelText = "Email", textState = viewModel.emailState)
+            PhoneTextFieldFillMaxWidth(
+                labelText = stringResource(id = string.number),
+                textState = viewModel.phoneState
+            )
+            EmailTextFieldFillMaxWidth(
+                labelText = stringResource(id = string.email),
+                textState = viewModel.emailState
+            )
 
-            TextFieldDisabledClickable(
-                labelText = "Source",
+            TextFieldDisabledClickable(labelText = stringResource(id = string.source),
                 isActive = viewModel.selectedAdSourceState.value != null,
                 textState = viewModel.adSourceState,
                 onclick = {
@@ -152,11 +158,11 @@ fun CreateLeadScreen(
         }
 
         PrimaryRowMaxWithInBox {
-            SecondaryButtonInRow("Cancel") {
+            SecondaryButtonInRow(stringResource(id = string.cancel)) {
 
             }
             Spacer18dp()
-            PrimaryButtonInRow("Save") {
+            PrimaryButtonInRow(stringResource(id = string.save)) {
                 viewModel.createLead()
             }
         }

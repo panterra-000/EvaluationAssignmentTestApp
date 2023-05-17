@@ -14,6 +14,7 @@ import mapp.test.core.domain.createlead.GetCountriesUseCase
 import mapp.test.core.domain.createlead.GetIntentionTypesUseCase
 import mapp.test.core.domain.createlead.GetLanguagesUseCase
 import mapp.test.core.domain.leadprofile.GetLeadProfileUseCase
+import mapp.test.core.domain.leadprofile.GetLeadStatusTypesUseCase
 import mapp.test.core.service.LeadsService
 import mapp.test.core.service.LeadsServiceImpl
 import mapp.test.core.service.createlead.CreateLeadService
@@ -120,5 +121,12 @@ object AppModule {
     fun provideGetLeadProfileUseCase(service: LeadProfileService): GetLeadProfileUseCase {
         return GetLeadProfileUseCase(service)
     }
+
+    @Provides
+    @Singleton
+    fun provideGetLeadStatusTypesUseCase(service: LeadProfileService): GetLeadStatusTypesUseCase {
+        return GetLeadStatusTypesUseCase(service)
+    }
+
 
 }

@@ -15,7 +15,7 @@ import mapp.test.coreui.composable.Spacer13dp
 import mapp.test.coreui.composable.Spacer6dp
 import mapp.test.coreui.composable.buttons.PrimaryIconButton
 import mapp.test.coreui.composable.image.AvatarImageView
-import mapp.test.coreui.composable.text.ActiveTitleText18sp
+import mapp.test.coreui.composable.text.ActiveTitleText22sp
 import mapp.test.coreui.composable.text.PrimaryTitleText16sp
 
 @Composable
@@ -34,7 +34,7 @@ fun LeadHeaderView(
                 Spacer13dp()
                 Column(Modifier.fillMaxWidth()) {
                     Row {
-                        ActiveTitleText18sp(text = fullName)
+                        ActiveTitleText22sp(text = fullName)
                         Spacer(modifier = Modifier.width(16.dp))
                         PrimaryIconButton(
                             resId = mapp.test.coreui.R.drawable.ic_edit, onclick = editClick

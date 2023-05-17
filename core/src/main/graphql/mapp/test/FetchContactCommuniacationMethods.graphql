@@ -1,0 +1,29 @@
+query FetchContactCommunicationMethods($params: ContactCommunicationMethodsInput!){
+    fetchContactCommunicationMethods(params: $params){
+        contact {
+            id
+            color
+            phone
+            text
+        }
+        calls {
+            callsCount
+            callType {
+                id
+                title
+                icon
+            }
+        }
+        chats {
+            chatId
+            chatType {
+                icon
+                title
+                id
+                backgroundColor
+            }
+            messagesCount
+        }
+
+    }
+}

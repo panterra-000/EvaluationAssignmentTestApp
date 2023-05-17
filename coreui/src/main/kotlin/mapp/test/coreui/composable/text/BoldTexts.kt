@@ -26,6 +26,39 @@ fun ActiveTitleText18sp(
 
 
 @Composable
+fun ActiveTitleText22sp(
+    text: String,
+    alignCenter: Boolean = false,
+    color: Color = TestAppTheme.colors.primaryTitleText
+) {
+    Text(
+        text = text,
+        fontSize = 22.sp,
+        color = color,
+        fontWeight = FontWeight(600),
+        textAlign = if (alignCenter) TextAlign.Center else TextAlign.Start
+    )
+}
+
+
+@Composable
+fun ActiveTitleText20sp(
+    text: String,
+    alignCenter: Boolean = false,
+    color: Color = TestAppTheme.colors.primaryTitleText
+) {
+    Text(
+        text = text,
+        fontSize = 20.sp,
+        color = color,
+        fontWeight = FontWeight(600),
+        textAlign = if (alignCenter) TextAlign.Center else TextAlign.Start
+    )
+}
+
+
+
+@Composable
 fun AvatarText23sp(
     text: String,
     alignCenter: Boolean = false,

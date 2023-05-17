@@ -6,7 +6,7 @@ data class CreateLeadInputModel(
     val intentionId: Int,
     val languages: List<Int>,
     val adSourceId: Int,
-    val countryId: Int,
+    val countryId: Int? = null,
     val cityId: Int,
     val email: String,
     val phone: String,
