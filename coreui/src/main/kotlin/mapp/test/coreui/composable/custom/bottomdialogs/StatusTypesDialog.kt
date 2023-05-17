@@ -24,7 +24,7 @@ import mapp.test.coreui.composable.Spacer8dp
 import mapp.test.coreui.composable.buttons.PrimaryIconButton
 import mapp.test.coreui.composable.column.PrimaryLazyColumnMaxWith
 import mapp.test.coreui.composable.custom.ErrorView
-import mapp.test.coreui.composable.icons.PrimaryIcon
+import mapp.test.coreui.composable.icons.SimpleRoundIconWithBackground
 import mapp.test.coreui.composable.row.PrimaryRowMaxWithVerticalAlignCenter
 import mapp.test.coreui.composable.text.PrimaryTitleText18sp
 import mapp.test.coreui.composable.text.Text18spInactive
@@ -75,7 +75,7 @@ fun StatusTypesDialog(
 
                     is AppNetworkResponse.Success -> {
                         PrimaryLazyColumnMaxWith(content = {
-                            items(statusTypesData.data){type->
+                            items(statusTypesData.data) { type ->
                                 StatusTypeView(
                                     type = type,
                                 ) {
@@ -103,10 +103,7 @@ private fun StatusTypeView(
             .padding(bottom = 8.dp),
         verticalAlignment = Alignment.CenterVertically
     ) {
-        PrimaryIcon(
-            resId = R.drawable.ic_selected_radio,
-            iconTint = TestAppTheme.colors.selectedIconTint
-        )
+        SimpleRoundIconWithBackground(type.color)
         Spacer8dp()
         Text18spInactive(text = type.title)
     }

@@ -10,6 +10,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
+import mapp.test.core.util.showShortToast
 import mapp.test.coreui.R
 import mapp.test.coreui.composable.FillAvailableSpacer
 import mapp.test.coreui.composable.Spacer20dp
@@ -17,6 +18,7 @@ import mapp.test.coreui.composable.box.PrimaryBoxMaxSize
 import mapp.test.coreui.composable.buttons.PrimaryIconButton
 import mapp.test.coreui.composable.buttons.SecondaryButton
 import mapp.test.coreui.composable.column.PrimaryColumnMaxWidth
+import mapp.test.coreui.composable.custom.PrimaryCenterLoadingView
 import mapp.test.coreui.composable.custom.PrimaryScrollableColumnBodyWithAppBar
 import mapp.test.coreui.composable.custom.bottomdialogs.StatusTypesDialog
 import mapp.test.coreui.composable.row.PrimaryRowMaxWith
@@ -43,7 +45,14 @@ fun LeadProfileScreen(
     }
 
     LaunchedEffect(key1 = Unit, block = {
-        viewModel.getLeadProfile(id)
+        viewModel.errorState.collect {
+            showShortToast(context, it)
+        }
+    })
+
+    LaunchedEffect(key1 = Unit, block = {
+        viewModel.leadIdState.value = id
+        viewModel.getLeadProfile()
     })
 
     PrimaryBoxMaxSize {
@@ -169,9 +178,12 @@ fun LeadProfileScreen(
 
     StatusTypesDialog(showState = statusTypesDialogShowState.value,
         statusTypesData = viewModel.statusTypesState.value,
-        itemCLick = {
+        itemCLick = { statusData ->
             statusTypesDialogShowState.value = false
+            viewModel.updateLeadStatusData(statusId = statusData.id)
         },
         closeClick = { statusTypesDialogShowState.value = false })
+
+    PrimaryCenterLoadingView(state = viewModel.loadingState.value)
 }
 

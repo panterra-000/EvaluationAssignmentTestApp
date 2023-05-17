@@ -9,18 +9,17 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import mapp.test.coreui.theme.TestAppTheme
+import mapp.test.coreui.utils.getColor
 
 @Composable
-fun RowScope.StatusStepItemView(isActive: Boolean) {
+fun RowScope.StatusStepItemView(isActive: Boolean, activeColor: String, inactiveColor: String) {
     Box(
         Modifier
             .weight(1f)
             .height(8.dp)
             .clip(RoundedCornerShape(45))
             .background(
-                if (isActive) TestAppTheme.colors.activeStatusItemTint else
-                    TestAppTheme.colors.inActiveactiveStatusItemTint
+                if (isActive) getColor(activeColor) else getColor(inactiveColor)
             )
     ) {
 

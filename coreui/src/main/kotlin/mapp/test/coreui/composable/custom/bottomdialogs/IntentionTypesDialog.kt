@@ -49,11 +49,11 @@ fun IntentionTypesDialog(
 
                 }
         ) {
-            Spacer(modifier = Modifier.weight(0.2f))
+            Spacer(modifier = Modifier.weight(0.7f))
 
             Column(
                 Modifier
-                    .weight(0.8f)
+                    .weight(0.3f)
                     .fillMaxWidth()
                     .background(TestAppTheme.colors.dialogBodyBackground)
                     .padding(18.dp)

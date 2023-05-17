@@ -4,6 +4,7 @@ import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.apollographql.apollo3.api.Optional
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -12,19 +13,27 @@ import mapp.test.FetchLeadQuery
 import mapp.test.FetchStatusTypesQuery
 import mapp.test.core.domain.leadprofile.GetLeadProfileUseCase
 import mapp.test.core.domain.leadprofile.GetLeadStatusTypesUseCase
+import mapp.test.core.domain.leadprofile.GetUpdateLeadUseCase
 import mapp.test.core.util.AppNetworkResponse
 import mapp.test.core.util.extensions.checkAndGetValue
-import mapp.test.core.util.myLogD
+import mapp.test.type.UpdateLeadInput
 import javax.inject.Inject
 
 @HiltViewModel
 class LeadProfileViewModel @Inject constructor(
     private val getLeadProfileUseCase: GetLeadProfileUseCase,
-    private val getLeadStatusTypesUseCase: GetLeadStatusTypesUseCase
+    private val getLeadStatusTypesUseCase: GetLeadStatusTypesUseCase,
+    private val getUpdateLeadUseCase: GetUpdateLeadUseCase
 ) : ViewModel() {
+
+    val leadIdState = mutableStateOf(-1)
 
     private val _errorState = Channel<String>()
     val errorState = _errorState.receiveAsFlow()
+
+    private val _loadingState = mutableStateOf(false)
+    val loadingState: State<Boolean> get() = _loadingState
+
 
     private val _leadProfileState = mutableStateOf<FetchLeadQuery.Data1?>(null)
     val leadProfileState: State<FetchLeadQuery.Data1?> get() = _leadProfileState
@@ -51,11 +60,12 @@ class LeadProfileViewModel @Inject constructor(
     val statusTypesState: State<AppNetworkResponse<List<FetchStatusTypesQuery.FetchLeadStatusType>>>
         get() = _statusTypesState
 
-    fun getLeadProfile(leadId: Int) {
+    fun getLeadProfile() {
+        _loadingState.value = true
         viewModelScope.launch {
-            when (val resp = getLeadProfileUseCase.execute(leadId)) {
+            when (val resp = getLeadProfileUseCase.execute(leadIdState.value)) {
                 is AppNetworkResponse.Error -> {
-
+                    _errorState.send(resp.message)
                 }
 
                 AppNetworkResponse.Loading -> {
@@ -63,23 +73,46 @@ class LeadProfileViewModel @Inject constructor(
                 }
 
                 is AppNetworkResponse.Success -> {
-
-                    myLogD("::::::: => Lead Profile => :  ${resp.data}")
-
-                    _leadProfileState.value = resp.data
-                    intentionTypeState.value = resp.data.intention?.title.checkAndGetValue()
-                    adSourceState.value = resp.data.adSource?.title.checkAndGetValue()
-                    countryState.value = resp.data.country?.title.checkAndGetValue()
-                    webSourceState.value = resp.data.webSource?.title.checkAndGetValue()
-                    cityState.value = resp.data.city?.title.checkAndGetValue()
-                    channelSourceState.value = resp.data.channelSource?.title.checkAndGetValue()
-                    languageState.value = resp.data.languages?.get(0)?.title.checkAndGetValue()
-                    propertyTypeState.value = resp.data.propertyType?.title.checkAndGetValue()
-                    nationalityState.value = resp.data.nationality?.title.checkAndGetValue()
-                    birthDayState.value = resp.data.birthDate.toString().checkAndGetValue()
-
+                    setFields(resp.data)
                 }
             }
+            _loadingState.value = false
+        }
+    }
+
+    private fun setFields(data: FetchLeadQuery.Data1) {
+        _leadProfileState.value = data
+        intentionTypeState.value = data.intention?.title.checkAndGetValue()
+        adSourceState.value = data.adSource?.title.checkAndGetValue()
+        countryState.value = data.country?.title.checkAndGetValue()
+        webSourceState.value = data.webSource?.title.checkAndGetValue()
+        cityState.value = data.city?.title.checkAndGetValue()
+        channelSourceState.value = data.channelSource?.title.checkAndGetValue()
+        languageState.value = data.languages?.get(0)?.title.checkAndGetValue()
+        propertyTypeState.value = data.propertyType?.title.checkAndGetValue()
+        nationalityState.value = data.nationality?.title.checkAndGetValue()
+        birthDayState.value = data.birthDate.toString().checkAndGetValue()
+    }
+
+    fun updateLeadStatusData(statusId: Int) {
+        _loadingState.value = true
+        viewModelScope.launch {
+            val resp = getUpdateLeadUseCase.execute(
+                UpdateLeadInput(
+                    leadId = leadIdState.value,
+                    statusId = Optional.present(statusId)
+                )
+            )
+            when (resp) {
+                is AppNetworkResponse.Error -> {
+                    _errorState.send(resp.message)
+                }
+                AppNetworkResponse.Loading -> {}
+                is AppNetworkResponse.Success -> {
+                    getLeadProfile()
+                }
+            }
+            _loadingState.value = false
         }
     }
 

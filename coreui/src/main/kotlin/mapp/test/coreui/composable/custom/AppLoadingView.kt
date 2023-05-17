@@ -5,6 +5,7 @@ import androidx.compose.material.CircularProgressIndicator
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import mapp.test.coreui.composable.box.PrimaryBoxMaxSizeAlignCenter
 import mapp.test.coreui.theme.TestAppTheme
 
 @Composable
@@ -15,5 +16,19 @@ fun BoxScope.PrimaryLoadingView(state: Boolean) {
                 Alignment.Center
             )
         )
+    }
+}
+
+
+@Composable
+fun PrimaryCenterLoadingView(state: Boolean) {
+    if (state) {
+        PrimaryBoxMaxSizeAlignCenter {
+            CircularProgressIndicator(
+                color = TestAppTheme.colors.selectedIconTint, modifier = Modifier.align(
+                    Alignment.Center
+                )
+            )
+        }
     }
 }

@@ -10,10 +10,10 @@ import mapp.test.coreui.composable.Spacer8dp
 import mapp.test.coreui.composable.column.PrimaryBorderedColumnMaxSize
 import mapp.test.coreui.composable.custom.StatusStepItemView
 import mapp.test.coreui.composable.icons.PrimaryIcon
+import mapp.test.coreui.composable.icons.SimpleRoundIconWithBackground
 import mapp.test.coreui.composable.row.PrimaryRowMaxWithVerticalAlignCenter
 import mapp.test.coreui.composable.text.PrimaryActiveText14sp
 import mapp.test.coreui.composable.text.PrimarySubTitleBoldText13sp
-import mapp.test.coreui.theme.TestAppTheme
 
 @Composable
 fun LeadStatusView(status: FetchLeadQuery.Status, onClick: () -> Unit) {
@@ -21,10 +21,7 @@ fun LeadStatusView(status: FetchLeadQuery.Status, onClick: () -> Unit) {
         PrimaryRowMaxWithVerticalAlignCenter {
             PrimarySubTitleBoldText13sp(text = stringResource(id = mapp.test.coreui.R.string.status_title))
             FillAvailableSpacer()
-            PrimaryIcon(
-                resId = mapp.test.coreui.R.drawable.ic_selected_radio,
-                iconTint = TestAppTheme.colors.selectedRadioTint
-            )
+            SimpleRoundIconWithBackground(color = status.color)
             Spacer8dp()
             PrimaryActiveText14sp(text = status.title)
             Spacer16dp()
@@ -35,7 +32,11 @@ fun LeadStatusView(status: FetchLeadQuery.Status, onClick: () -> Unit) {
         Spacer8dp()
         PrimaryRowMaxWithVerticalAlignCenter {
             repeat((1..status.stepsCount).count()) { count ->
-                StatusStepItemView(isActive = count < status.step)
+                StatusStepItemView(
+                    isActive = count < status.step,
+                    activeColor = status.legacyColor,
+                    inactiveColor = status.backgroundColor
+                )
                 Spacer4dp()
             }
         }

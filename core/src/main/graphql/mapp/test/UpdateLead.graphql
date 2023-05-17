@@ -1,0 +1,7 @@
+mutation UpdateLead($params: UpdateLeadInput!){
+    updateLead(params: $params){
+        data {
+            id
+        }
+    }
+}
