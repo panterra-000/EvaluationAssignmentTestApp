@@ -164,7 +164,6 @@ class LeadProfileViewModel @Inject constructor(
         birthDayState.value = data.birthDate.toString().checkAndGetValue()
     }
 
-
     fun updateLeadStatusData(statusId: Int) {
         _loadingState.value = true
         viewModelScope.launch {
@@ -209,27 +208,27 @@ class LeadProfileViewModel @Inject constructor(
         intentionTypeState.value = intentionTypeModel?.title.checkAndGetValue()
     }
 
-    fun selectAdSource(adSourceModel: AdSourceModel?) {
+    private fun selectAdSource(adSourceModel: AdSourceModel?) {
         _selectedAdSourceState.value = adSourceModel
         adSourceState.value = adSourceModel?.title.checkAndGetValue()
     }
 
-    fun selectCountry(countryModel: CountryModel?) {
+    private fun selectCountry(countryModel: CountryModel?) {
         _selectedCountryState.value = countryModel
         countryState.value = countryModel?.name.checkAndGetValue()
     }
 
-    fun selectCity(cityModel: CityModel?) {
+    private fun selectCity(cityModel: CityModel?) {
         _selectedCityState.value = cityModel
         cityState.value = cityModel?.title.checkAndGetValue()
     }
 
-    fun selectWebSource(webSourceModel: WebSourceModel?) {
+    private fun selectWebSource(webSourceModel: WebSourceModel?) {
         _selectedWebSourceState.value = webSourceModel
         webSourceState.value = webSourceModel?.title.checkAndGetValue()
     }
 
-    fun selectChannelSource(channelSourceModel: ChannelSourceModel?) {
+    private fun selectChannelSource(channelSourceModel: ChannelSourceModel?) {
         _selectedChannelSourceState.value = channelSourceModel
         channelSourceState.value = channelSourceModel?.title.checkAndGetValue()
     }
