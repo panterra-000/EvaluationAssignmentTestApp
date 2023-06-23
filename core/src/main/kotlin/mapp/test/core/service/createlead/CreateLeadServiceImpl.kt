@@ -35,8 +35,10 @@ class CreateLeadServiceImpl(
         return try {
             val resp = apolloClient.query(FetchIntentionTypesQuery())
                 .execute().data?.fetchLeadIntentionTypes?.mapToIntentionTypeModelList()
-                ?: emptyList()
-            AppNetworkResponse.Success(resp)
+            resp?.let { resp_ ->
+                AppNetworkResponse.Success(resp_)
+            }
+                ?: AppNetworkResponse.Error(message = "Empty...")
         } catch (e: ApolloException) {
             myLogD("Error: $e")
             AppNetworkResponse.Error(message = e.message.toString())
@@ -47,8 +49,10 @@ class CreateLeadServiceImpl(
         return try {
             val resp = apolloClient.query(FetchCountriesQuery())
                 .execute().data?.fetchCountries?.mapToCountryModelList()
-                ?: emptyList()
-            AppNetworkResponse.Success(resp)
+            resp?.let { resp_ ->
+                AppNetworkResponse.Success(resp_)
+            }
+                ?: AppNetworkResponse.Error(message = "Empty...")
         } catch (e: ApolloException) {
             myLogD("Error: $e")
             AppNetworkResponse.Error(message = e.message.toString())
@@ -59,8 +63,10 @@ class CreateLeadServiceImpl(
         return try {
             val resp = apolloClient.query(FetchCitiesQuery(id))
                 .execute().data?.cities?.mapToCityModelList()
-                ?: emptyList()
-            AppNetworkResponse.Success(resp)
+            resp?.let { resp_ ->
+                AppNetworkResponse.Success(resp_)
+            }
+                ?: AppNetworkResponse.Error(message = "Empty...")
         } catch (e: ApolloException) {
             myLogD("Error: $e")
             AppNetworkResponse.Error(message = e.message.toString())
@@ -71,8 +77,10 @@ class CreateLeadServiceImpl(
         return try {
             val resp = apolloClient.query(FetchLanguagesQuery())
                 .execute().data?.languages?.mapToLanguageModelList()
-                ?: emptyList()
-            AppNetworkResponse.Success(resp)
+            resp?.let { resp_ ->
+                AppNetworkResponse.Success(resp_)
+            }
+                ?: AppNetworkResponse.Error(message = "Empty...")
         } catch (e: ApolloException) {
             myLogD("Error: $e")
             AppNetworkResponse.Error(message = e.message.toString())
@@ -83,8 +91,10 @@ class CreateLeadServiceImpl(
         return try {
             val resp = apolloClient.query(FetchAdSourcesQuery())
                 .execute().data?.fetchAdSources?.mapToAdSourceModelList()
-                ?: emptyList()
-            AppNetworkResponse.Success(resp)
+            resp?.let { resp_ ->
+                AppNetworkResponse.Success(resp_)
+            }
+                ?: AppNetworkResponse.Error(message = "Empty...")
         } catch (e: ApolloException) {
             myLogD("Error: $e")
             AppNetworkResponse.Error(message = e.message.toString())

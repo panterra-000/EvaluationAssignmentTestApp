@@ -70,7 +70,7 @@ fun LanguagesDialog(
                 Spacer18dp()
                 when (languagesData) {
                     is AppNetworkResponse.Error -> {
-                        ErrorView(message = languagesData.message)
+                        ErrorView(message = languagesData.message.ifEmpty { "ERROR..." })
                     }
 
                     AppNetworkResponse.Loading -> {

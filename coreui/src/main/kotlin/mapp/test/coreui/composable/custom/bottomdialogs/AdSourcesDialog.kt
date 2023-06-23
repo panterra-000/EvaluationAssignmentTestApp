@@ -56,7 +56,7 @@ fun AdSourcesDialog(
                     .padding(18.dp)
             ) {
                 PrimaryRowMaxWithVerticalAlignCenter {
-                    PrimaryTitleText18sp(text = "Select country")
+                    PrimaryTitleText18sp(text = "Source")
                     FillAvailableSpacer()
                     PrimaryIconButton(resId = R.drawable.ic_down) {
                         closeClick()
@@ -65,7 +65,7 @@ fun AdSourcesDialog(
                 Spacer18dp()
                 when (adSourcesState) {
                     is AppNetworkResponse.Error -> {
-                        ErrorView(message = adSourcesState.message)
+                        ErrorView(message = adSourcesState.message.ifEmpty { "ERROR..." })
                     }
 
                     AppNetworkResponse.Loading -> {

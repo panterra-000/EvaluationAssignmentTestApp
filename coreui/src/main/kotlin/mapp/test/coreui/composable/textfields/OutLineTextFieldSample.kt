@@ -123,8 +123,7 @@ fun TextFieldDisabledClickable(
     textState: MutableState<String>,
     onclick: () -> Unit
 ) {
-    OutlinedTextField(
-        shape = RoundedCornerShape(12.dp),
+    OutlinedTextField(shape = RoundedCornerShape(12.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             unfocusedBorderColor = TestAppTheme.colors.unFocusedBorderColor,
             focusedBorderColor = TestAppTheme.colors.focusedBorderColor,
@@ -149,8 +148,7 @@ fun TextFieldDisabledClickable(
         modifier = Modifier
             .padding(top = 12.dp)
             .clickable { onclick() }
-            .fillMaxWidth()
-    )
+            .fillMaxWidth())
 }
 
 
@@ -158,11 +156,11 @@ fun TextFieldDisabledClickable(
 fun RowScope.TextFieldInRowDisabledClickableInRow(
     labelText: String = "",
     isActive: Boolean = false,
+    changeEnable: Boolean = true,
     textState: MutableState<String>,
     onclick: () -> Unit
 ) {
-    OutlinedTextField(
-        shape = RoundedCornerShape(12.dp),
+    OutlinedTextField(shape = RoundedCornerShape(12.dp),
         colors = TextFieldDefaults.outlinedTextFieldColors(
             unfocusedBorderColor = TestAppTheme.colors.unFocusedBorderColor,
             focusedBorderColor = TestAppTheme.colors.focusedBorderColor,
@@ -185,7 +183,6 @@ fun RowScope.TextFieldInRowDisabledClickableInRow(
         },
         modifier = Modifier
             .padding(top = 12.dp)
-            .clickable { onclick() }
-            .weight(1f)
-    )
+            .clickable { if (changeEnable) onclick() }
+            .weight(1f))
 }

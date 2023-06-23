@@ -68,7 +68,7 @@ fun IntentionTypesDialog(
                 Spacer18dp()
                 when (intentionTypesData) {
                     is AppNetworkResponse.Error -> {
-                        ErrorView(message = intentionTypesData.message)
+                        ErrorView(message = intentionTypesData.message.ifEmpty { "Error..." })
                     }
 
                     AppNetworkResponse.Loading -> {

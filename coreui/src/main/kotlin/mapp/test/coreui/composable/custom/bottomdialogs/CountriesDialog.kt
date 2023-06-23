@@ -68,7 +68,7 @@ fun CountriesDialog(
                 Spacer18dp()
                 when (countries) {
                     is AppNetworkResponse.Error -> {
-                        ErrorView(message = countries.message)
+                        ErrorView(message = countries.message.ifEmpty { "ERROR..." })
                     }
 
                     AppNetworkResponse.Loading -> {

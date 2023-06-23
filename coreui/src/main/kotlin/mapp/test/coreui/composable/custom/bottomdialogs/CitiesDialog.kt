@@ -56,7 +56,7 @@ fun CitiesDialog(
                     .padding(18.dp)
             ) {
                 PrimaryRowMaxWithVerticalAlignCenter {
-                    PrimaryTitleText18sp(text = "Select country")
+                    PrimaryTitleText18sp(text = "Select city")
                     FillAvailableSpacer()
                     PrimaryIconButton(resId = R.drawable.ic_down) {
                         closeClick()
@@ -65,7 +65,7 @@ fun CitiesDialog(
                 Spacer18dp()
                 when (citiesState) {
                     is AppNetworkResponse.Error -> {
-                        ErrorView(message = citiesState.message)
+                        ErrorView(message = citiesState.message.ifEmpty { "ERROR..." })
                     }
 
                     AppNetworkResponse.Loading -> {

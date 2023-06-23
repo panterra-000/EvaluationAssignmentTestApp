@@ -1,5 +1,6 @@
 package mapp.test.core.mappers
 
+import mapp.test.FetchLeadQuery
 import mapp.test.FetchLeadsQuery
 import mapp.test.core.data.AdSourceModel
 import mapp.test.core.data.ChannelSourceModel
@@ -7,6 +8,7 @@ import mapp.test.core.data.IntentionTypeModel
 import mapp.test.core.data.LeadModel
 import mapp.test.core.data.LeadsResponse
 import mapp.test.core.data.StatusModel
+import mapp.test.core.data.WebSourceModel
 import mapp.test.core.util.changeDateFormat
 
 fun FetchLeadsQuery.Data1.toLeadViewData(): LeadModel {
@@ -49,11 +51,25 @@ fun FetchLeadsQuery.Intention.toModel(): IntentionTypeModel? {
     } else null
 }
 
+fun FetchLeadQuery.Intention.toModel(): IntentionTypeModel? {
+    return if (this.id != null && this.title != null) {
+        return IntentionTypeModel(title = this.title, id = this.id)
+    } else null
+}
+
+
 fun FetchLeadsQuery.Status.toModel(): StatusModel? {
     return if (this.id != null && this.title != null) {
         return StatusModel(title = this.title, id = this.id)
     } else null
 }
+
+fun FetchLeadQuery.Status.toModel(): StatusModel? {
+    return if (this.id != null && this.title != null) {
+        return StatusModel(title = this.title, id = this.id)
+    } else null
+}
+
 
 fun FetchLeadsQuery.AdSource.toModel(): AdSourceModel? {
     return if (this.id != null && this.title != null) {
@@ -61,7 +77,26 @@ fun FetchLeadsQuery.AdSource.toModel(): AdSourceModel? {
     } else null
 }
 
+fun FetchLeadQuery.WebSource.toModel(): WebSourceModel? {
+    return if (this.id != null && this.title != null) {
+        return WebSourceModel(title = this.title, id = this.id, url = this.url)
+    } else null
+}
+
+fun FetchLeadQuery.AdSource.toModel(): AdSourceModel? {
+    return if (this.id != null && this.title != null) {
+        return AdSourceModel(title = this.title, id = this.id)
+    } else null
+}
+
 fun FetchLeadsQuery.ChannelSource.toModel(): ChannelSourceModel? {
+    return if (this.id != null && this.title != null) {
+        return ChannelSourceModel(title = this.title, id = this.id)
+    } else null
+}
+
+
+fun FetchLeadQuery.ChannelSource.toModel(): ChannelSourceModel? {
     return if (this.id != null && this.title != null) {
         return ChannelSourceModel(title = this.title, id = this.id)
     } else null
